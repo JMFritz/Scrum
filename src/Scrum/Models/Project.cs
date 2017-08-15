@@ -9,12 +9,13 @@ namespace Scrum.Models
 {
     [Table("Projects")]
     public class Project
-    { 
+    {
         [Key]
         public int ProjectId { get; set; }
         public string Title { get; set; }
-        public List<string> UserStories { get; set; }
-        public List<Tool> Tools { get; set; }
+        public DateTime StartDate { get; set; }
+        public virtual ICollection<Tool> Tools { get; set; }
         public string Description { get; set; }
+        public virtual ApplicationUser user { get; set; }
     }
 }

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "GummiBears!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Scrum.Models.Project
+
+<div class="page">
+    <h2>New Project</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title)
+        @Html.LabelFor(model => model.Description)
+        @Html.TextBoxFor(model => model.Description)
+
+        <input type="submit" value="Create New Project" />
+    }
+</div>

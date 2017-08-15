@@ -8,9 +8,10 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170815211834_projectclass1")]
+    partial class projectclass1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -179,8 +180,6 @@ namespace Scrum.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("StartDate");
-
                     b.Property<string>("Title");
 
                     b.Property<string>("userId");
@@ -210,28 +209,6 @@ namespace Scrum.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Tools");
-                });
-
-            modelBuilder.Entity("Scrum.Models.Update", b =>
-                {
-                    b.Property<int>("UpdateId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Note");
-
-                    b.Property<int?>("ProjectId");
-
-                    b.Property<string>("TimeStamp");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("UpdateId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Updates");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -283,17 +260,6 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Project")
                         .WithMany("Tools")
                         .HasForeignKey("ProjectId");
-                });
-
-            modelBuilder.Entity("Scrum.Models.Update", b =>
-                {
-                    b.HasOne("Scrum.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId");
-
-                    b.HasOne("Scrum.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
         }
     }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Scrum.Models
 {
@@ -13,5 +13,12 @@ namespace Scrum.Models
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Tool> Tools { get; set; }
+        public virtual DbSet<Update> Updates { get; set; }
     }
 }

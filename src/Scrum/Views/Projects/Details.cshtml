@@ -1,0 +1,14 @@
+﻿@model Scrum.Models.Project
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Project Details</h2>
+
+<p>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</p>
+<p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+<p>@Html.ActionLink("Leave an Update", "Create", "Updates", new { id = Model.ProjectId })</p>
+
+@Html.ActionLink("Back to List", "Index")</p>

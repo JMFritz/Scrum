@@ -41,6 +41,19 @@
                     }
                 });
             });
+            $('.new-project').submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("NewProject")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        var resultMessage = 'You Created a new Project';
+                        $('#projectConfirm').html(resultMessage);
+                    }
+                });
+            });
         });
     </script>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -66,9 +79,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2017 - Scrum</p>
-        </footer>
     </div>
 
     <environment names="Development">

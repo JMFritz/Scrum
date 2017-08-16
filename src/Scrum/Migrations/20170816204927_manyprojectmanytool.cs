@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Scrum.Migrations
 {
-    public partial class initial : Migration
+    public partial class manyprojectmanytool : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -192,18 +192,11 @@ namespace Scrum.Migrations
                     Description = table.Column<string>(nullable: true),
                     Documentation = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: true),
                     ToolTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tools", x => x.ToolId);
-                    table.ForeignKey(
-                        name: "FK_Tools_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Tools_ToolTypes_ToolTypeId",
                         column: x => x.ToolTypeId,
@@ -238,6 +231,30 @@ namespace Scrum.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectTools",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(nullable: false),
+                    ToolId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectTools", x => new { x.ProjectId, x.ToolId });
+                    table.ForeignKey(
+                        name: "FK_ProjectTools_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectTools_Tools_ToolId",
+                        column: x => x.ToolId,
+                        principalTable: "Tools",
+                        principalColumn: "ToolId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -287,9 +304,14 @@ namespace Scrum.Migrations
                 column: "userId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tools_ProjectId",
-                table: "Tools",
+                name: "IX_ProjectTools_ProjectId",
+                table: "ProjectTools",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectTools_ToolId",
+                table: "ProjectTools",
+                column: "ToolId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tools_ToolTypeId",
@@ -325,7 +347,7 @@ namespace Scrum.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Tools");
+                name: "ProjectTools");
 
             migrationBuilder.DropTable(
                 name: "Updates");
@@ -334,10 +356,13 @@ namespace Scrum.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "ToolTypes");
+                name: "Tools");
 
             migrationBuilder.DropTable(
                 name: "Projects");
+
+            migrationBuilder.DropTable(
+                name: "ToolTypes");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

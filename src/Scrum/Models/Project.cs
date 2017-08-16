@@ -16,7 +16,7 @@ namespace Scrum.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public virtual ICollection<Update> Updates { get; set; }
-        public virtual ICollection<Tool> Tools { get; set; }
+        public virtual ICollection<ProjectTool> ProjectTools { get; set; }
         public virtual ApplicationUser user { get; set; }
     }
 }

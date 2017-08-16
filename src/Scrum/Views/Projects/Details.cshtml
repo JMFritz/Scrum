@@ -17,5 +17,17 @@
     <p>@update.Note</p>
 
 }
+<h3>Add New Tool</h3>
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("ToolId")
+    <input type="submit" value="AddTool"/>
+}
+<h3>Project Tools/Resources:</h3>
+@foreach (var join in Model.ProjectTools)
+{
+    <p>@join.Tool.Name</p>
 
-@Html.ActionLink("Back to List", "Index")</p>
+}
+
+<p>@Html.ActionLink("Back to List", "Index")</p>

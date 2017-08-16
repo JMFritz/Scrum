@@ -17,5 +17,6 @@ namespace Scrum.Models
         public string Documentation { get; set; }
         public int ToolTypeId { get; set; }
         public virtual ToolType ToolType{ get; set; }
+        public virtual ICollection<ProjectTool> ProjectTools { get; set; }
     }
 }

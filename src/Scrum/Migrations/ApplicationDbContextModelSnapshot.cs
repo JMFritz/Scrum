@@ -192,6 +192,21 @@ namespace Scrum.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("Scrum.Models.ProjectTool", b =>
+                {
+                    b.Property<int>("ProjectId");
+
+                    b.Property<int>("ToolId");
+
+                    b.HasKey("ProjectId", "ToolId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("ToolId");
+
+                    b.ToTable("ProjectTools");
+                });
+
             modelBuilder.Entity("Scrum.Models.Tool", b =>
                 {
                     b.Property<int>("ToolId")
@@ -203,13 +218,9 @@ namespace Scrum.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("ProjectId");
-
                     b.Property<int>("ToolTypeId");
 
                     b.HasKey("ToolId");
-
-                    b.HasIndex("ProjectId");
 
                     b.HasIndex("ToolTypeId");
 
@@ -294,12 +305,21 @@ namespace Scrum.Migrations
                         .HasForeignKey("userId");
                 });
 
+            modelBuilder.Entity("Scrum.Models.ProjectTool", b =>
+                {
+                    b.HasOne("Scrum.Models.Project", "Project")
+                        .WithMany("ProjectTools")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Scrum.Models.Tool", "Tool")
+                        .WithMany("ProjectTools")
+                        .HasForeignKey("ToolId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Scrum.Models.Tool", b =>
                 {
-                    b.HasOne("Scrum.Models.Project")
-                        .WithMany("Tools")
-                        .HasForeignKey("ProjectId");
-
                     b.HasOne("Scrum.Models.ToolType", "ToolType")
                         .WithMany("Tools")
                         .HasForeignKey("ToolTypeId")

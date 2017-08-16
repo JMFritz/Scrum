@@ -7,6 +7,7 @@ using Scrum.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Scrum.Controllers
 {
@@ -26,8 +27,21 @@ namespace Scrum.Controllers
         }
         public IActionResult Details(int Id)
         {
-            var thisProject = _db.Projects.Include(projects => projects.Updates).FirstOrDefault(projects => projects.ProjectId == Id);
+            var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.ProjectTools).FirstOrDefault(projects => projects.ProjectId == Id);
+            ViewBag.ToolId = new SelectList(_db.Tools, "ToolId", "Name");
             return View(thisProject);
+        }
+        [HttpPost, ActionName("Details")]
+        public IActionResult AddTool(int toolId, int id)
+        {
+            var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.ProjectTools).FirstOrDefault(projects => projects.ProjectId == id);
+            var newTool = _db.Tools.FirstOrDefault(tools => tools.ToolId == toolId);
+            var newProjectTool = new ProjectTool();
+            newProjectTool.ProjectId = id;
+            newProjectTool.ToolId = toolId;
+            _db.ProjectTools.Add(newProjectTool);
+            _db.SaveChanges();
+            return RedirectToAction("Details");
         }
         public IActionResult Create()
         {

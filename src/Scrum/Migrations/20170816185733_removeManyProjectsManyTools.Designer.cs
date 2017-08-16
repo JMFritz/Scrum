@@ -8,8 +8,8 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170815211834_projectclass1")]
-    partial class projectclass1
+    [Migration("20170816185733_removeManyProjectsManyTools")]
+    partial class removeManyProjectsManyTools
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -180,6 +180,8 @@ namespace Scrum.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<DateTime>("StartDate");
+
                     b.Property<string>("Title");
 
                     b.Property<string>("userId");
@@ -204,11 +206,49 @@ namespace Scrum.Migrations
 
                     b.Property<int?>("ProjectId");
 
+                    b.Property<int>("ToolTypeId");
+
                     b.HasKey("ToolId");
 
                     b.HasIndex("ProjectId");
 
+                    b.HasIndex("ToolTypeId");
+
                     b.ToTable("Tools");
+                });
+
+            modelBuilder.Entity("Scrum.Models.ToolType", b =>
+                {
+                    b.Property<int>("ToolTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ToolTypeId");
+
+                    b.ToTable("ToolTypes");
+                });
+
+            modelBuilder.Entity("Scrum.Models.Update", b =>
+                {
+                    b.Property<int>("UpdateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Note");
+
+                    b.Property<int?>("ProjectId");
+
+                    b.Property<DateTime>("TimeStamp");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("UpdateId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Updates");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -260,6 +300,22 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Project")
                         .WithMany("Tools")
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.ToolType", "ToolType")
+                        .WithMany("Tools")
+                        .HasForeignKey("ToolTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Scrum.Models.Update", b =>
+                {
+                    b.HasOne("Scrum.Models.Project", "Project")
+                        .WithMany("Updates")
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
         }
     }

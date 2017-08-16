@@ -8,8 +8,8 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170816022057_addupdatesclass2")]
-    partial class addupdatesclass2
+    [Migration("20170816181238_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -206,11 +206,27 @@ namespace Scrum.Migrations
 
                     b.Property<int?>("ProjectId");
 
+                    b.Property<int>("ToolTypeId");
+
                     b.HasKey("ToolId");
 
                     b.HasIndex("ProjectId");
 
+                    b.HasIndex("ToolTypeId");
+
                     b.ToTable("Tools");
+                });
+
+            modelBuilder.Entity("Scrum.Models.ToolType", b =>
+                {
+                    b.Property<int>("ToolTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ToolTypeId");
+
+                    b.ToTable("ToolTypes");
                 });
 
             modelBuilder.Entity("Scrum.Models.Update", b =>
@@ -284,6 +300,11 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Project")
                         .WithMany("Tools")
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.ToolType", "ToolType")
+                        .WithMany("Tools")
+                        .HasForeignKey("ToolTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Scrum.Models.Update", b =>

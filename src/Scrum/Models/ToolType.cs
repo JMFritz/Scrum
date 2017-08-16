@@ -7,15 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Scrum.Models
 {
-    [Table("Tools")]
-    public class Tool
+    [Table("ToolTypes")]
+    public class ToolType
     {
         [Key]
-        public int ToolId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Documentation { get; set; }
         public int ToolTypeId { get; set; }
-        public virtual ToolType ToolType{ get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Tool> Tools { get; set; }
     }
 }

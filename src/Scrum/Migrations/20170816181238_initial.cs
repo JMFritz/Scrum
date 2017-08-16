@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Scrum.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,6 +60,19 @@ namespace Scrum.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ToolTypes",
+                columns: table => new
+                {
+                    ToolTypeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToolTypes", x => x.ToolTypeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +161,85 @@ namespace Scrum.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    ProjectId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    userId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.ProjectId);
+                    table.ForeignKey(
+                        name: "FK_Projects_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tools",
+                columns: table => new
+                {
+                    ToolId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    Documentation = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    ProjectId = table.Column<int>(nullable: true),
+                    ToolTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tools", x => x.ToolId);
+                    table.ForeignKey(
+                        name: "FK_Tools_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tools_ToolTypes_ToolTypeId",
+                        column: x => x.ToolTypeId,
+                        principalTable: "ToolTypes",
+                        principalColumn: "ToolTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Updates",
+                columns: table => new
+                {
+                    UpdateId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Note = table.Column<string>(nullable: true),
+                    ProjectId = table.Column<int>(nullable: true),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Updates", x => x.UpdateId);
+                    table.ForeignKey(
+                        name: "FK_Updates_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Updates_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -188,6 +280,31 @@ namespace Scrum.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_userId",
+                table: "Projects",
+                column: "userId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tools_ProjectId",
+                table: "Tools",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tools_ToolTypeId",
+                table: "Tools",
+                column: "ToolTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Updates_ProjectId",
+                table: "Updates",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Updates_UserId",
+                table: "Updates",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -208,7 +325,19 @@ namespace Scrum.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Tools");
+
+            migrationBuilder.DropTable(
+                name: "Updates");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ToolTypes");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -38,6 +38,8 @@ namespace Scrum.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
+            DateTime timestamp = DateTime.Now;
+            project.StartDate = timestamp;
             project.user = currentUser;
             _db.Projects.Add(project);
             _db.SaveChanges();

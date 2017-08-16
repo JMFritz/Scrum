@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Scrum.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Scrum.Controllers
 {
@@ -24,6 +25,7 @@ namespace Scrum.Controllers
         }
         public IActionResult Create()
         {
+            ViewBag.ToolTypeId = new SelectList(_db.ToolTypes, "ToolTypeId", "Name");
             return View();
         }
         [HttpPost]

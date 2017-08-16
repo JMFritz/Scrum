@@ -17,6 +17,9 @@
     @Html.LabelFor(model => model.Documentation)
     @Html.EditorFor(model => model.Documentation)
 
+
+    @Html.DropDownList("ToolTypeId")
+
     <input type="submit" value="Create" />
 }
 @Html.ActionLink("Back to Tool Box", "Index")

@@ -13,9 +13,10 @@ namespace Scrum.Models
         [Key]
         public int ProjectId { get; set; }
         public string Title { get; set; }
-        public DateTime StartDate { get; set; }
-        public virtual ICollection<Tool> Tools { get; set; }
         public string Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public virtual ICollection<Update> Updates { get; set; }
+        public virtual ICollection<Tool> Tools { get; set; }
         public virtual ApplicationUser user { get; set; }
     }
 }

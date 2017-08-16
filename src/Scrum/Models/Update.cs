@@ -14,7 +14,7 @@ namespace Scrum.Models
         public int UpdateId { get; set; }
         [DataType(DataType.MultilineText)]
         public string Note { get; set; }
-        public string TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual Project Project { get; set; }
     }

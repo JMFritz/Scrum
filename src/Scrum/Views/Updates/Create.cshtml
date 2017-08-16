@@ -1,0 +1,14 @@
+﻿@model Scrum.Models.Update
+
+@{
+    ViewData["Title"] = "Update - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Note)
+    @Html.EditorFor(model => model.Note)
+
+    <input type="submit" value="Add Update" />
+}

@@ -13,5 +13,6 @@ namespace Scrum.Models
         [Key]
         public int UserStoryId { get; set; }
         public string Spec { get; set; }
+        public Project Project { get; set; }
     }
 }

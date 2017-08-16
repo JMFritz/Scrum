@@ -27,7 +27,7 @@ namespace Scrum.Controllers
         }
         public IActionResult Details(int Id)
         {
-            var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.ProjectTools).FirstOrDefault(projects => projects.ProjectId == Id);
+            var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.UserStories).Include(projects => projects.ProjectTools).FirstOrDefault(projects => projects.ProjectId == Id);
             ViewBag.ToolId = new SelectList(_db.Tools, "ToolId", "Name");
             return View(thisProject);
         }

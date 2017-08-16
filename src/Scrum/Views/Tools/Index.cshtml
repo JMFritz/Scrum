@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Scrum.Models.Tool>
+
+@{
+    ViewData["Title"] = "Scrum Tools";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Documentation)
+        </th>
+    </tr>
+
+    @foreach (var listTool in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelTool => listTool.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelTool => listTool.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelTool => listTool.Documentation)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = listTool.ToolId }) |
+                @Html.ActionLink("Details", "Details", new { id = listTool.ToolId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = listTool.ToolId })
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Tools Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Scrum.Models.Tool
+
+<h2>Add a new tool</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    @Html.LabelFor(model => model.Documentation)
+    @Html.EditorFor(model => model.Documentation)
+
+    <input type="submit" value="Create" />
+}
+@Html.ActionLink("Back to Tool Box", "Index")

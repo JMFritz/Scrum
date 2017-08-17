@@ -11,6 +11,7 @@
 <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
 <p>@Html.ActionLink("Add an Update", "Create", "Updates", new { id = Model.ProjectId })</p>
 <p>@Html.ActionLink("Add a User Story", "Create", "UserStories", new { id = Model.ProjectId })</p>
+<p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.ProjectId })</p>
 
 <h3>Project Updates/Comments:</h3>
 @foreach (var update in Model.Updates)
@@ -32,7 +33,12 @@
 @foreach (var join in Model.ProjectTools)
 {
     <p>@join.Tool.Name</p>
+}
 
+<h3>Project Tasks:</h3>
+@foreach (var task in Model.Tasks)
+{
+    <p>@task.Description | @Html.ActionLink("View", "Details", "Tasks", new { id = @task.TaskId })</p>
 }
 
 <p>@Html.ActionLink("Back to List", "Index")</p>

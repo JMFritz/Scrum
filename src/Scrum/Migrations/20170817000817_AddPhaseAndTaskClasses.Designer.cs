@@ -8,9 +8,10 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170817000817_AddPhaseAndTaskClasses")]
+    partial class AddPhaseAndTaskClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -181,7 +182,7 @@ namespace Scrum.Migrations
 
                     b.HasKey("PhaseId");
 
-                    b.ToTable("Phases");
+                    b.ToTable("Phase");
                 });
 
             modelBuilder.Entity("Scrum.Models.Project", b =>
@@ -230,13 +231,9 @@ namespace Scrum.Migrations
 
                     b.Property<int>("PhaseId");
 
-                    b.Property<int>("ProjectId");
-
                     b.HasKey("TaskId");
 
                     b.HasIndex("PhaseId");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tasks");
                 });
@@ -373,11 +370,6 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Phase", "Phase")
                         .WithMany("Tasks")
                         .HasForeignKey("PhaseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Scrum.Models.Project", "Project")
-                        .WithMany("Tasks")
-                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

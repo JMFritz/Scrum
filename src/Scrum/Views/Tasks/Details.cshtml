@@ -1,0 +1,18 @@
+﻿@model Scrum.Models.Task
+
+@{
+    ViewData["Title"] = "Task - Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Task Details</h2>
+
+<p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+<p>@Html.DisplayNameFor(model => model.Complete) : @Html.DisplayFor(model => model.Complete)</p>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TaskId)
+    <input type="submit" value="Completed" />
+}
+

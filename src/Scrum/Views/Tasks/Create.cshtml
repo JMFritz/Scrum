@@ -1,0 +1,19 @@
+﻿@model Scrum.Models.Task
+@{
+    ViewData["Title"] = "Task - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Task</h2>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    @Html.LabelFor(model => model.Complete)
+    @Html.EditorFor(model => model.Complete)
+
+    @Html.DropDownList("PhaseId")
+
+    <input type="submit" value="Add Task" />
+}

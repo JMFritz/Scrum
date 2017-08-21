@@ -15,6 +15,8 @@ namespace Scrum.Models
         [DataType(DataType.MultilineText)]
         public string Note { get; set; }
         public DateTime TimeStamp { get; set; }
+        public int UpdateTypeId { get; set; }
+        public virtual UpdateType UpdateType { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual Project Project { get; set; }
     }

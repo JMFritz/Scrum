@@ -230,7 +230,7 @@ namespace Scrum.Migrations
 
                     b.Property<int>("PhaseId");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<int?>("ProjectId");
 
                     b.HasKey("TaskId");
 
@@ -284,15 +284,31 @@ namespace Scrum.Migrations
 
                     b.Property<DateTime>("TimeStamp");
 
+                    b.Property<int>("UpdateTypeId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("UpdateId");
 
                     b.HasIndex("ProjectId");
 
+                    b.HasIndex("UpdateTypeId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Updates");
+                });
+
+            modelBuilder.Entity("Scrum.Models.UpdateType", b =>
+                {
+                    b.Property<int>("UpdateTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("UpdateTypeId");
+
+                    b.ToTable("UpdateTypes");
                 });
 
             modelBuilder.Entity("Scrum.Models.UserStory", b =>
@@ -377,8 +393,7 @@ namespace Scrum.Migrations
 
                     b.HasOne("Scrum.Models.Project", "Project")
                         .WithMany("Tasks")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Scrum.Models.Tool", b =>
@@ -394,6 +409,11 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Project", "Project")
                         .WithMany("Updates")
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.UpdateType", "UpdateType")
+                        .WithMany("Updates")
+                        .HasForeignKey("UpdateTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Scrum.Models.ApplicationUser", "User")
                         .WithMany()

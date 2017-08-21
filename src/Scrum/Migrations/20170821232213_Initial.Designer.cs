@@ -8,8 +8,8 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170816230822_addUserStoryProjectRel")]
-    partial class addUserStoryProjectRel
+    [Migration("20170821232213_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -173,6 +173,18 @@ namespace Scrum.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Scrum.Models.Phase", b =>
+                {
+                    b.Property<int>("PhaseId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("PhaseId");
+
+                    b.ToTable("Phases");
+                });
+
             modelBuilder.Entity("Scrum.Models.Project", b =>
                 {
                     b.Property<int>("ProjectId")
@@ -206,6 +218,28 @@ namespace Scrum.Migrations
                     b.HasIndex("ToolId");
 
                     b.ToTable("ProjectTools");
+                });
+
+            modelBuilder.Entity("Scrum.Models.Task", b =>
+                {
+                    b.Property<int>("TaskId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Complete");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("PhaseId");
+
+                    b.Property<int?>("ProjectId");
+
+                    b.HasKey("TaskId");
+
+                    b.HasIndex("PhaseId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("Scrum.Models.Tool", b =>
@@ -251,15 +285,31 @@ namespace Scrum.Migrations
 
                     b.Property<DateTime>("TimeStamp");
 
+                    b.Property<int>("UpdateTypeId");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("UpdateId");
 
                     b.HasIndex("ProjectId");
 
+                    b.HasIndex("UpdateTypeId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Updates");
+                });
+
+            modelBuilder.Entity("Scrum.Models.UpdateType", b =>
+                {
+                    b.Property<int>("UpdateTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("UpdateTypeId");
+
+                    b.ToTable("UpdateTypes");
                 });
 
             modelBuilder.Entity("Scrum.Models.UserStory", b =>
@@ -335,6 +385,18 @@ namespace Scrum.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Scrum.Models.Task", b =>
+                {
+                    b.HasOne("Scrum.Models.Phase", "Phase")
+                        .WithMany("Tasks")
+                        .HasForeignKey("PhaseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Scrum.Models.Project", "Project")
+                        .WithMany("Tasks")
+                        .HasForeignKey("ProjectId");
+                });
+
             modelBuilder.Entity("Scrum.Models.Tool", b =>
                 {
                     b.HasOne("Scrum.Models.ToolType", "ToolType")
@@ -348,6 +410,11 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Project", "Project")
                         .WithMany("Updates")
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.UpdateType", "UpdateType")
+                        .WithMany("Updates")
+                        .HasForeignKey("UpdateTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Scrum.Models.ApplicationUser", "User")
                         .WithMany()

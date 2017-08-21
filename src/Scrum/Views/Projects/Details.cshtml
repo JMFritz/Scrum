@@ -10,7 +10,6 @@
 <p>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</p>
 <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
 <p>@Html.ActionLink("Add an Update", "Create", "Updates", new { id = Model.ProjectId })</p>
-<p>@Html.ActionLink("Add a User Story", "Create", "UserStories", new { id = Model.ProjectId })</p>
 <p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.ProjectId })</p>
 
 <h3>Project Updates/Comments:</h3>
@@ -19,6 +18,8 @@
     <p>@update.Note</p>
 }
 <h3>User Stories:</h3>
+<button type="button" class="addStory" id="@Model.ProjectId">Add User Story</button>
+<div id="storyForm"></div>
 @foreach (var story in Model.UserStories)
 {
     <p>@story.Spec</p>

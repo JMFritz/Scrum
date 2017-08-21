@@ -1,14 +1,9 @@
 ﻿@model Scrum.Models.UserStory
 
-@{
-    ViewData["Title"] = "User Story - Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Spec)
     @Html.EditorFor(model => model.Spec)
 
-    <input type="submit" value="Add Update" />
+    <input type="submit" value="Submit User Story" />
 }

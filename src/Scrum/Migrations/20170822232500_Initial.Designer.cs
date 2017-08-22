@@ -8,7 +8,7 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170821232213_Initial")]
+    [Migration("20170822232500_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -220,6 +220,32 @@ namespace Scrum.Migrations
                     b.ToTable("ProjectTools");
                 });
 
+            modelBuilder.Entity("Scrum.Models.Sprint", b =>
+                {
+                    b.Property<int>("SprintId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Done");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("Goal");
+
+                    b.Property<bool>("InProgress");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("ProjectId");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("SprintId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Sprints");
+                });
+
             modelBuilder.Entity("Scrum.Models.Task", b =>
                 {
                     b.Property<int>("TaskId")
@@ -229,15 +255,21 @@ namespace Scrum.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<bool>("InProgress");
+
                     b.Property<int>("PhaseId");
 
                     b.Property<int?>("ProjectId");
+
+                    b.Property<int?>("SprintId");
 
                     b.HasKey("TaskId");
 
                     b.HasIndex("PhaseId");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("SprintId");
 
                     b.ToTable("Tasks");
                 });
@@ -283,6 +315,8 @@ namespace Scrum.Migrations
 
                     b.Property<int?>("ProjectId");
 
+                    b.Property<int?>("SprintId");
+
                     b.Property<DateTime>("TimeStamp");
 
                     b.Property<int>("UpdateTypeId");
@@ -292,6 +326,8 @@ namespace Scrum.Migrations
                     b.HasKey("UpdateId");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("SprintId");
 
                     b.HasIndex("UpdateTypeId");
 
@@ -385,6 +421,13 @@ namespace Scrum.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Scrum.Models.Sprint", b =>
+                {
+                    b.HasOne("Scrum.Models.Project", "Project")
+                        .WithMany("Sprints")
+                        .HasForeignKey("ProjectId");
+                });
+
             modelBuilder.Entity("Scrum.Models.Task", b =>
                 {
                     b.HasOne("Scrum.Models.Phase", "Phase")
@@ -393,8 +436,12 @@ namespace Scrum.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Scrum.Models.Project", "Project")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.Sprint")
+                        .WithMany("Tasks")
+                        .HasForeignKey("SprintId");
                 });
 
             modelBuilder.Entity("Scrum.Models.Tool", b =>
@@ -410,6 +457,10 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.Project", "Project")
                         .WithMany("Updates")
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("Scrum.Models.Sprint")
+                        .WithMany("Updates")
+                        .HasForeignKey("SprintId");
 
                     b.HasOne("Scrum.Models.UpdateType", "UpdateType")
                         .WithMany("Updates")

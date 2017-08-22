@@ -232,65 +232,27 @@ namespace Scrum.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Sprints",
                 columns: table => new
                 {
-                    TaskId = table.Column<int>(nullable: false)
+                    SprintId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Complete = table.Column<bool>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    PhaseId = table.Column<int>(nullable: false),
-                    ProjectId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Phases_PhaseId",
-                        column: x => x.PhaseId,
-                        principalTable: "Phases",
-                        principalColumn: "PhaseId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Updates",
-                columns: table => new
-                {
-                    UpdateId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Note = table.Column<string>(nullable: true),
+                    Done = table.Column<bool>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    Goal = table.Column<string>(nullable: true),
+                    InProgress = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     ProjectId = table.Column<int>(nullable: true),
-                    TimeStamp = table.Column<DateTime>(nullable: false),
-                    UpdateTypeId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    StartDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Updates", x => x.UpdateId);
+                    table.PrimaryKey("PK_Sprints", x => x.SprintId);
                     table.ForeignKey(
-                        name: "FK_Updates_Projects_ProjectId",
+                        name: "FK_Sprints_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Updates_UpdateTypes_UpdateTypeId",
-                        column: x => x.UpdateTypeId,
-                        principalTable: "UpdateTypes",
-                        principalColumn: "UpdateTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Updates_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -336,6 +298,84 @@ namespace Scrum.Migrations
                         principalTable: "Tools",
                         principalColumn: "ToolId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tasks",
+                columns: table => new
+                {
+                    TaskId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Complete = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    InProgress = table.Column<bool>(nullable: false),
+                    PhaseId = table.Column<int>(nullable: false),
+                    ProjectId = table.Column<int>(nullable: true),
+                    SprintId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Phases_PhaseId",
+                        column: x => x.PhaseId,
+                        principalTable: "Phases",
+                        principalColumn: "PhaseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Sprints_SprintId",
+                        column: x => x.SprintId,
+                        principalTable: "Sprints",
+                        principalColumn: "SprintId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Updates",
+                columns: table => new
+                {
+                    UpdateId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Note = table.Column<string>(nullable: true),
+                    ProjectId = table.Column<int>(nullable: true),
+                    SprintId = table.Column<int>(nullable: true),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    UpdateTypeId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Updates", x => x.UpdateId);
+                    table.ForeignKey(
+                        name: "FK_Updates_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Updates_Sprints_SprintId",
+                        column: x => x.SprintId,
+                        principalTable: "Sprints",
+                        principalColumn: "SprintId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Updates_UpdateTypes_UpdateTypeId",
+                        column: x => x.UpdateTypeId,
+                        principalTable: "UpdateTypes",
+                        principalColumn: "UpdateTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Updates_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -395,6 +435,11 @@ namespace Scrum.Migrations
                 column: "ToolId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sprints_ProjectId",
+                table: "Sprints",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_PhaseId",
                 table: "Tasks",
                 column: "PhaseId");
@@ -405,6 +450,11 @@ namespace Scrum.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tasks_SprintId",
+                table: "Tasks",
+                column: "SprintId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tools_ToolTypeId",
                 table: "Tools",
                 column: "ToolTypeId");
@@ -413,6 +463,11 @@ namespace Scrum.Migrations
                 name: "IX_Updates_ProjectId",
                 table: "Updates",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Updates_SprintId",
+                table: "Updates",
+                column: "SprintId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Updates_UpdateTypeId",
@@ -469,13 +524,16 @@ namespace Scrum.Migrations
                 name: "Phases");
 
             migrationBuilder.DropTable(
+                name: "Sprints");
+
+            migrationBuilder.DropTable(
                 name: "UpdateTypes");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "ToolTypes");
 
             migrationBuilder.DropTable(
-                name: "ToolTypes");
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

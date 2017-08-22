@@ -14,6 +14,7 @@ namespace Scrum.Models
         public int TaskId { get; set; }
         public string Description { get; set; }
         public int PhaseId { get; set; }
+        public bool InProgress { get; set; }
         public bool Complete { get; set; }
         public virtual Phase Phase { get; set; }
         public virtual Project Project { get; set; }

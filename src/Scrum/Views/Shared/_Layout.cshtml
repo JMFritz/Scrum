@@ -67,6 +67,19 @@
                     }
                 });
             });
+            $('.createSprint').click(function () {
+                clicked = $(this)[0].id;
+                clicked = parseInt(clicked);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'html',
+                    data: { id: clicked },
+                    url: '@Url.Action("Create","Sprints")',
+                    success: function (result) {
+                        $('#sprintForm').html(result);
+                    }
+                });
+            });
         });
     </script>
     <div class="navbar navbar-inverse navbar-fixed-top">

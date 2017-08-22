@@ -18,7 +18,7 @@ namespace Scrum.Models
         public virtual ICollection<UserStory> UserStories { get; set; }
         public virtual ICollection<Update> Updates { get; set; }
         public virtual ICollection<ProjectTool> ProjectTools { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<Sprint> Sprints { get; set; }
         public virtual ApplicationUser user { get; set; }
     }
 }

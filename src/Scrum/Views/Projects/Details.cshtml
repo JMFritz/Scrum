@@ -16,6 +16,7 @@
 @foreach (var update in Model.Updates)
 {
     <p>@update.Note</p>
+    <p>@update.TimeStamp</p>
 }
 <h3>User Stories:</h3>
 <button type="button" class="addStory" id="@Model.ProjectId">Add User Story</button>
@@ -36,10 +37,13 @@
     <p>@join.Tool.Name</p>
 }
 
-<h3>Project Tasks:</h3>
-@foreach (var task in Model.Tasks)
+<h3>Sprints:</h3>
+@foreach (var sprint in Model.Sprints)
 {
-    <p>@task.Description | @Html.ActionLink("View", "Details", "Tasks", new { id = @task.TaskId })</p>
+    <p>@Html.ActionLink(@sprint.Name, "Details", "Sprints", new { id = sprint.SprintId }) | @sprint.StartDate | @sprint.EndDate</p>
 }
+<button type="button" class="createSprint" id="@Model.ProjectId">Create a Sprint</button>
+<div id="sprintForm"></div>
+
 
 <p>@Html.ActionLink("Back to List", "Index")</p>

@@ -1,3 +1,6 @@
+### PRIORITY
+* add updatetype drop down for functioning create feature on Update Object.
+
 #### Completed:
 * create project/sprint
 * create user account

@@ -30,6 +30,7 @@ namespace Scrum.Models
             base.OnModelCreating(builder);
         }
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Sprint> Sprints { get; set; }
         public virtual DbSet<Tool> Tools { get; set; }
         public virtual DbSet<Update> Updates { get; set; }
         public virtual DbSet<UpdateType> UpdateTypes { get; set; }

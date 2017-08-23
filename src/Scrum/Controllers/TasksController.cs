@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Scrum.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Scrum.Controllers
 {
@@ -45,11 +46,24 @@ namespace Scrum.Controllers
         [HttpPost]
         public IActionResult Create(Task task, int id)
         {
-            task.Project = _db.Projects.FirstOrDefault(projects => projects.ProjectId == id);
+            task.Sprint = _db.Sprints.FirstOrDefault(s => s.SprintId == id);
             task.Complete = false;
             _db.Tasks.Add(task);
             _db.SaveChanges();
-            return RedirectToAction("Details", "Projects", new { id = id });
+            return RedirectToAction("Details", "Sprints", new { id = id });
+        }
+        public IActionResult Edit(int id)
+        {
+            ViewBag.PhaseId = new SelectList(_db.Phases, "PhaseId", "Description");
+            var thisTask = _db.Tasks.FirstOrDefault(s => s.TaskId == id);
+            return View(thisTask);
+        }
+        [HttpPost]
+        public IActionResult Edit(Task task)
+        {
+            _db.Entry(task).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Details", "Tasks", new { id = task.TaskId });
         }
     }
 }

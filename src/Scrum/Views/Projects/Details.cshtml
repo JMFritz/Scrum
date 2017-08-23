@@ -10,7 +10,7 @@
 <p>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</p>
 <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
 <p>@Html.ActionLink("Add an Update", "Create", "Updates", new { id = Model.ProjectId })</p>
-<p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.ProjectId })</p>
+
 
 <h3>Project Updates/Comments:</h3>
 @foreach (var update in Model.Updates)

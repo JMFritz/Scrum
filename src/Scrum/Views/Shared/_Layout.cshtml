@@ -80,6 +80,19 @@
                     }
                 });
             });
+            $('.editTaskForm').click(function () {
+                clicked = $(this)[0].id;
+                clicked = parseInt(clicked);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'html',
+                    data: { id: clicked },
+                    url: '@Url.Action("Edit", "Tasks")',
+                    success: function (result) {
+                        $('#editTask').html(result);
+                    }
+                });
+            });
         });
     </script>
     <div class="navbar navbar-inverse navbar-fixed-top">

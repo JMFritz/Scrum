@@ -22,7 +22,7 @@ namespace Scrum.Controllers
         }
         public IActionResult Details(int Id)
         {
-            var thisSprint = _db.Sprints.FirstOrDefault(s => s.SprintId == Id);
+            var thisSprint = _db.Sprints.Include(s => s.Tasks).Include(s => s.Updates).FirstOrDefault(s => s.SprintId == Id);
             return View(thisSprint);
         }
         public IActionResult Create()

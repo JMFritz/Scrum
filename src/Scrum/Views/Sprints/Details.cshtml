@@ -8,6 +8,14 @@
 <h3>@Model.Name</h3>
 <h3>@Model.Goal</h3>
 <h3>@Model.StartDate</h3>
-<h3>@Model.Goal</h3>
+<h3>@Model.EndDate</h3>
+<p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.SprintId })</p>
+
+@foreach(var task in Model.Tasks)
+{
+    <div class="done-@task.Complete">
+        <p>@Html.ActionLink(@task.Description, "Details", "Tasks", new { id = @task.TaskId })</p>
+    </div>
+}
 
 

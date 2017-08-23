@@ -1,0 +1,15 @@
+﻿@model Scrum.Models.Task
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TaskId)
+
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    @Html.LabelFor(model => model.Priority)
+    @Html.EditorFor(model => model.Priority)
+
+    @Html.DropDownList("PhaseId")
+    <input type="submit" value="Save" />
+}

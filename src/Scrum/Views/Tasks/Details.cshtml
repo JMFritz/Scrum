@@ -8,6 +8,7 @@
 <h2>Task Details</h2>
 
 <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+<p>@Html.DisplayNameFor(model => model.Priority) : @Html.DisplayFor(model => model.Priority)</p>
 <p>@Html.DisplayNameFor(model => model.Complete) : @Html.DisplayFor(model => model.Complete)</p>
 
 @using (Html.BeginForm())
@@ -16,3 +17,5 @@
     <input type="submit" value="Completed" />
 }
 
+<button type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
+<div id="editTask"></div>

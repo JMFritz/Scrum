@@ -10,6 +10,7 @@
 * add tools to toolbox
 * add tools to projects
 * mark tasks complete
+* full crud for "Tasks" objects
 
 #### To Do
 * update/task completion timeline diagram

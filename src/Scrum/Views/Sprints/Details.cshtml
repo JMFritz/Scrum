@@ -18,4 +18,11 @@
     </div>
 }
 
+<p>@ViewBag.Current</p>
 
+<div class="progress">
+    <div class="progress-bar progress-bar-info" role="progressbar"
+         aria-valuenow="@ViewBag.Current" aria-valuemin="0" aria-valuemax="100" style="width:@ViewBag.Current%">
+        @ViewBag.Current% Complete
+    </div>
+</div>

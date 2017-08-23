@@ -23,6 +23,17 @@ namespace Scrum.Controllers
         public IActionResult Details(int Id)
         {
             var thisSprint = _db.Sprints.Include(s => s.Tasks).Include(s => s.Updates).FirstOrDefault(s => s.SprintId == Id);
+            var count = 0;
+            foreach (var task in thisSprint.Tasks)
+            {
+                if (task.Complete)
+                {
+                    count++;
+                }
+            }
+            int max = thisSprint.Tasks.Count;
+            var currentPercent = Math.Round(((double)count/(double)max)*100);
+            ViewBag.Current = currentPercent;
             return View(thisSprint);
         }
         public IActionResult Create()

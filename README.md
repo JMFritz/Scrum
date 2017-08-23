@@ -1,6 +1,5 @@
 ### PRIORITY
 
-
 #### Completed:
 * create project
 * create sprint
@@ -15,7 +14,7 @@
 #### To Do
 * update/task completion timeline diagram
 * project/sprint progress bar (dynamic based off amount of tasks)
-* full CRUD for tasks, updates, tools.
+* full CRUD for updates, tools.
 * add roles to project (Product Owner, Scrum Master, Team Member)
 * style with scss
 * improve app flow

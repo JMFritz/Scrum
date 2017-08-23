@@ -52,3 +52,34 @@
 
 
 <p>@Html.ActionLink("Back to List", "Index")</p>
+
+<p>@ViewBag.SprintTotal</p>
+<div class="progress">
+    @foreach (var data in @ViewBag.SprintCollection)
+    {
+        @if (@data.Total >= 1 && @data.Total <= 10)
+        {
+            <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                @data.Name
+            </div>
+        }
+        @if (@data.Total >= 11 && @data.Total <= 29)
+        {
+            <div class="progress-bar progress-bar-warning" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                @data.Name
+            </div>
+        }
+        @if (@data.Total >= 30 && @data.Total <= 49)
+        {
+            <div class="progress-bar progress-bar-info" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                @data.Name
+            </div>
+        }
+        @if (@data.Total >= 50 && @data.Total <= 100)
+        {
+            <div class="progress-bar progress-bar-success" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                @data.Name
+            </div>
+        }
+    }
+</div>

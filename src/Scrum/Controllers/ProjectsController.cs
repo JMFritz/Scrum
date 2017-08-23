@@ -34,6 +34,23 @@ namespace Scrum.Controllers
             ViewBag.Tasks = _db.Tasks.Where(t => t.UserId == currentUserId);
             var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.UserStories).Include(projects => projects.ProjectTools).Include(projects => projects.Sprints).FirstOrDefault(projects => projects.ProjectId == Id);
             ViewBag.ToolId = new SelectList(_db.Tools, "ToolId", "Name");
+            var sprints = _db.Sprints.Where(s => s.Project == thisProject);
+            double dayCount = 0;
+            List<SprintData> sprintDayCounts = new List<SprintData>();
+            foreach (var sprint in sprints)
+            {
+                dayCount += (sprint.EndDate - sprint.StartDate).TotalDays;
+            }
+            foreach (var sprint in sprints)
+            {
+                var newSprintData = new SprintData();
+                double sprintDays = (Math.Round((((sprint.EndDate - sprint.StartDate).TotalDays) / dayCount) * 100));
+                newSprintData.Name = sprint.Name;
+                newSprintData.Total = sprintDays;
+                sprintDayCounts.Add(newSprintData);
+            }
+            ViewBag.SprintTotal = dayCount;
+            ViewBag.SprintCollection = sprintDayCounts;
             return View(thisProject);
         }
         [HttpPost, ActionName("Details")]

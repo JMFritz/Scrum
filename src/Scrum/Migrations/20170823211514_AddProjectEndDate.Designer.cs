@@ -8,9 +8,10 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170823211514_AddProjectEndDate")]
+    partial class AddProjectEndDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -236,7 +237,7 @@ namespace Scrum.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<int?>("ProjectId");
 
                     b.Property<DateTime>("StartDate");
 
@@ -428,8 +429,7 @@ namespace Scrum.Migrations
                 {
                     b.HasOne("Scrum.Models.Project", "Project")
                         .WithMany("Sprints")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Scrum.Models.Task", b =>

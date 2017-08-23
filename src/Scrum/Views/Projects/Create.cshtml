@@ -13,6 +13,8 @@
         @Html.TextBoxFor(model => model.Title)
         @Html.LabelFor(model => model.Description)
         @Html.TextBoxFor(model => model.Description)
+        <p>Deadline</p>
+        @Html.EditorFor(model => model.EndDate)
 
         <input type="submit" value="Create New Project" />
     }

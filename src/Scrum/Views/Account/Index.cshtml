@@ -12,6 +12,7 @@
     <p>Hello @User.Identity.Name!</p>
     @using (Html.BeginForm("LogOff", "Account"))
     {
+        @Html.ActionLink("View Profile", "Profile", new { id = User.Identity.Name})
         <input type="submit" class="btn btn-default" value="Log out" />
     }
 }

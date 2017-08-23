@@ -83,22 +83,5 @@ namespace Scrum.Controllers
             _db.SaveChanges();
             return RedirectToAction("Details", "Sprints", new { id = link });
         }
-
-        public IActionResult Assign(int id)
-        {
-            var thisTask = _db.Tasks.FirstOrDefault(t => t.TaskId == id);
-
-            return View(thisTask);
-        }
-        [HttpPost]
-        public IActionResult Assign(int id, string Id)
-        {
-            var thisTask = _db.Tasks.FirstOrDefault(t => t.TaskId == id);
-            var link = thisTask.TaskId;
-            var thisUser = _db.Users.FirstOrDefault(u => u.Id == Id);
-            thisTask.User = thisUser;
-            _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
     }
 }

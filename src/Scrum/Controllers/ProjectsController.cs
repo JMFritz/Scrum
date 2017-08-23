@@ -25,8 +25,13 @@ namespace Scrum.Controllers
         {
             return View(_db.Projects.ToList());
         }
-        public IActionResult Details(int Id)
+        public async Task<IActionResult> Details(int Id)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            var currentUserId = currentUser.Id;
+            ViewBag.CurrentUser = currentUser.UserName;
+            ViewBag.Tasks = _db.Tasks.Where(t => t.UserId == currentUserId);
             var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.UserStories).Include(projects => projects.ProjectTools).Include(projects => projects.Sprints).FirstOrDefault(projects => projects.ProjectId == Id);
             ViewBag.ToolId = new SelectList(_db.Tools, "ToolId", "Name");
             return View(thisProject);

@@ -6,6 +6,11 @@
 }
 
 <h2>Project Details</h2>
+<h2>Assigned to You @ViewBag.CurrentUser</h2>
+@foreach(var task in @ViewBag.Tasks)
+{
+    <p>@task.Description</p>
+}
 
 <p>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</p>
 <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Scrum.Models;
 using Microsoft.AspNetCore.Identity;
 using Scrum.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Scrum.Controllers
 {
@@ -29,7 +30,6 @@ namespace Scrum.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {

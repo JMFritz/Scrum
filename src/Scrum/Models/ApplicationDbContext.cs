@@ -29,6 +29,7 @@ namespace Scrum.Models
                 .HasForeignKey(bi => bi.ToolId);
             base.OnModelCreating(builder);
         }
+        //public virtual DbSet<ApplicationUser> Users { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Sprint> Sprints { get; set; }
         public virtual DbSet<Tool> Tools { get; set; }

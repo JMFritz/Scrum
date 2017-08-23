@@ -15,5 +15,16 @@
 
     @Html.DropDownList("PhaseId")
 
+    @Html.DropDownList("UserId")
+
+    <select asp-for="Priority">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+        <option value="Block">Block</option>
+        <option value="Bug">Bug</option>
+    </select>
+
+
     <input type="submit" value="Add Task" />
 }

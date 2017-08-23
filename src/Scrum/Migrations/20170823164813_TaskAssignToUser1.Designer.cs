@@ -8,9 +8,10 @@ using Scrum.Models;
 namespace Scrum.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170823164813_TaskAssignToUser1")]
+    partial class TaskAssignToUser1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -262,7 +263,9 @@ namespace Scrum.Migrations
 
                     b.Property<int?>("SprintId");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("TaskId");
 
@@ -270,7 +273,7 @@ namespace Scrum.Migrations
 
                     b.HasIndex("SprintId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Tasks");
                 });
@@ -442,7 +445,7 @@ namespace Scrum.Migrations
 
                     b.HasOne("Scrum.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Scrum.Models.Tool", b =>

@@ -1,0 +1,12 @@
+﻿@model Scrum.Models.Task
+@{
+    ViewData["Title"] = "Task - Assign";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TaskId)
+    @Html.DropDownList("Team")
+    <input type="submit" value="Assign" />
+}

@@ -19,3 +19,5 @@
 
 <button type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
 <div id="editTask"></div>
+
+<p>@Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.TaskId })</p>

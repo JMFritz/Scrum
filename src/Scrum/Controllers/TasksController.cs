@@ -65,5 +65,20 @@ namespace Scrum.Controllers
             _db.SaveChanges();
             return RedirectToAction("Details", "Tasks", new { id = task.TaskId });
         }
+
+        public IActionResult Delete(int id)
+        {
+            var thisTask = _db.Tasks.Include(t => t.Sprint).FirstOrDefault(t => t.TaskId == id);
+            return View(thisTask);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var thisTask = _db.Tasks.Include(t => t.Sprint).FirstOrDefault(t => t.TaskId == id);
+            var link = thisTask.Sprint.SprintId;
+            _db.Tasks.Remove(thisTask);
+            _db.SaveChanges();
+            return RedirectToAction("Details", "Sprints", new { id = link });
+        }
     }
 }

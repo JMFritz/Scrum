@@ -19,6 +19,7 @@ namespace Scrum.Models
         public bool Complete { get; set; }
         public string Priority { get; set; }
         public virtual Phase Phase { get; set; }
+        public virtual Project Project { get; set; }
         public virtual Sprint Sprint { get; set; }
         public virtual ApplicationUser User { get; set; }
     }

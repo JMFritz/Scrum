@@ -49,11 +49,11 @@ namespace Scrum.Controllers
         [HttpPost]
         public IActionResult Create(Task task, int id)
         {
-            task.Sprint = _db.Sprints.FirstOrDefault(s => s.SprintId == id);
+            task.Project = _db.Projects.FirstOrDefault(p => p.ProjectId == id);
             task.Complete = false;
             _db.Tasks.Add(task);
             _db.SaveChanges();
-            return RedirectToAction("Details", "Sprints", new { id = id });
+            return RedirectToAction("Details", "Projects", new { id = id });
         }
         public IActionResult Edit(int id)
         {

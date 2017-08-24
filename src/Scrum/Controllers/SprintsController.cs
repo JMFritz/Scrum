@@ -22,7 +22,8 @@ namespace Scrum.Controllers
         }
         public IActionResult Details(int Id)
         {
-            var thisSprint = _db.Sprints.Include(s => s.Tasks).Include(s => s.Updates).FirstOrDefault(s => s.SprintId == Id);
+            var thisSprint = _db.Sprints.Include(s => s.Tasks).Include(s => s.Updates).Include(s => s.Project).Include(s => s.Project.Tasks).FirstOrDefault(s => s.SprintId == Id);
+            var thisProject = thisSprint.Project;
             var count = 0;
             foreach (var task in thisSprint.Tasks)
             {
@@ -32,9 +33,19 @@ namespace Scrum.Controllers
                 }
             }
             int max = thisSprint.Tasks.Count;
-            var currentPercent = Math.Round(((double)count/(double)max)*100);
+            var currentPercent = Math.Round(((double)count / (double)max) * 100);
+            var taskList = _db.Tasks.Where(t => t.Project == thisProject);
+            ViewBag.TaskId = new SelectList(taskList, "TaskId", "Description");
             ViewBag.Current = currentPercent;
             return View(thisSprint);
+        }
+        [HttpPost, ActionName("Details")]
+        public IActionResult AddTask(int TaskId, int id)
+        {
+            var thisTask = _db.Tasks.Include(t => t.Sprint).FirstOrDefault(t => t.TaskId == TaskId);
+            thisTask.Sprint = _db.Sprints.FirstOrDefault(s => s.SprintId == id);
+            _db.SaveChanges();
+            return RedirectToAction("Details");
         }
         public IActionResult Create()
         {

@@ -9,7 +9,12 @@
 <h3>@Model.Goal</h3>
 <h3>@Model.StartDate</h3>
 <h3>@Model.EndDate</h3>
-<p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.SprintId })</p>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("TaskId")
+    <input type="submit" value="AddTask" />
+}
 
 @foreach(var task in Model.Tasks)
 {

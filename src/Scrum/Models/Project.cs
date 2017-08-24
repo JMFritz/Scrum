@@ -17,6 +17,7 @@ namespace Scrum.Models
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
         public virtual ICollection<UserStory> UserStories { get; set; }
         public virtual ICollection<Update> Updates { get; set; }
         public virtual ICollection<ProjectTool> ProjectTools { get; set; }

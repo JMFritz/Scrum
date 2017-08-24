@@ -1,91 +1,107 @@
 ﻿@model Scrum.Models.Project
+<!doctype html>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Project Details</h2>
-<h2>Assigned to You @ViewBag.CurrentUser</h2>
-@foreach(var task in @ViewBag.Tasks)
-{
-    <p>@task.Description</p>
-}
-
-<p>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</p>
-<p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
-<p>@Html.ActionLink("Add an Update", "Create", "Updates", new { id = Model.ProjectId })</p>
-<p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.ProjectId })</p>
-<p>@Html.ActionLink("Add a Team Member", "AddUser", new { id = Model.ProjectId })</p>
-
-<h3>Project Team Members</h3>
-@foreach (var member in @ViewBag.Team)
-{
-    <p>@member</p>
-}
-<h3>Project Updates/Comments:</h3>
-@foreach (var update in Model.Updates)
-{
-    <p>@update.Note</p>
-    <p>@update.TimeStamp</p>
-}
-<h3>User Stories:</h3>
-<button type="button" class="addStory" id="@Model.ProjectId">Add User Story</button>
-<div id="storyForm"></div>
-@foreach (var story in Model.UserStories)
-{
-    <p>@story.Spec</p>
-}
-<h3>Add New Tool</h3>
-@using (Html.BeginForm())
-{
-    @Html.DropDownList("ToolId")
-    <input type="submit" value="AddTool"/>
-}
-<h3>Project Tools/Resources:</h3>
-@foreach (var join in Model.ProjectTools)
-{
-    <p>@join.Tool.Name</p>
-}
-
-<h3>Sprints:</h3>
-@foreach (var sprint in Model.Sprints)
-{
-    <p>@Html.ActionLink(@sprint.Name, "Details", "Sprints", new { id = sprint.SprintId }) | @sprint.StartDate | @sprint.EndDate</p>
-}
-<button type="button" class="createSprint" id="@Model.ProjectId">Create a Sprint</button>
-<div id="sprintForm"></div>
-
-
-<p>@Html.ActionLink("Back to List", "Index")</p>
-
-<p>@ViewBag.SprintTotal</p>
-<div class="progress">
-    @foreach (var data in @ViewBag.SprintCollection)
+<html lang="en">
+<head>
+    <title>The HTML5 Herald</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
+</head>
+<body>
+    <ul class="uk-breadcrumb">
+        <li><a href="#" class="uk-text-large uk-text-bold">Projects</a></li>
+        <li><a href="#" class="uk-text-large uk-text-bold">@Model.Title</a></li>
+    </ul>
+    <button class="uk-button uk-button-default" title="Hello World" uk-tooltip>Hover</button>
+    <h2>Project Details</h2>
+    <h2>Assigned to You @ViewBag.CurrentUser</h2>
+    @foreach (var task in @ViewBag.Tasks)
     {
-        @if (@data.Total >= 1 && @data.Total <= 10)
-        {
-            <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@data.Total%; border:solid 1px black">
-                @data.Name
-            </div>
-        }
-        @if (@data.Total >= 11 && @data.Total <= 29)
-        {
-            <div class="progress-bar progress-bar-warning" role="progressbar" style="width:@data.Total%; border:solid 1px black">
-                @data.Name
-            </div>
-        }
-        @if (@data.Total >= 30 && @data.Total <= 49)
-        {
-            <div class="progress-bar progress-bar-info" role="progressbar" style="width:@data.Total%; border:solid 1px black">
-                @data.Name
-            </div>
-        }
-        @if (@data.Total >= 50 && @data.Total <= 100)
-        {
-            <div class="progress-bar progress-bar-success" role="progressbar" style="width:@data.Total%; border:solid 1px black">
-                @data.Name
-            </div>
-        }
+        <p>@task.Description</p>
     }
-</div>
+    <hr class="uk-divider-icon">
+    <p>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</p>
+    <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+    <p>@Html.ActionLink("Add an Update", "Create", "Updates", new { id = Model.ProjectId })</p>
+    <p>@Html.ActionLink("Add a Task", "Create", "Tasks", new { id = Model.ProjectId })</p>
+    <p>@Html.ActionLink("Add a Team Member", "AddUser", new { id = Model.ProjectId })</p>
+    <hr class="uk-divider-icon">
+    <h3>Project Team Members</h3>
+    @foreach (var member in @ViewBag.Team)
+    {
+        <p>@member</p>
+    }
+    <hr class="uk-divider-icon">
+    <h3>Project Updates/Comments:</h3>
+    @foreach (var update in Model.Updates)
+    {
+        <p>@update.Note</p>
+        <p>@update.TimeStamp</p>
+    }
+    <hr class="uk-divider-icon">
+    <h3>User Stories:</h3>
+    <button type="button" class="addStory" id="@Model.ProjectId">Add User Story</button>
+    <div id="storyForm"></div>
+    @foreach (var story in Model.UserStories)
+    {
+        <p>@story.Spec</p>
+    }
+    <hr class="uk-divider-icon">
+    <h3>Add New Tool</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.DropDownList("ToolId")
+        <input type="submit" value="AddTool" />
+    }
+    <hr class="uk-divider-icon">
+    <h3>Project Tools/Resources:</h3>
+    @foreach (var join in Model.ProjectTools)
+    {
+        <p>@join.Tool.Name</p>
+    }
+    <hr class="uk-divider-icon">
+    <h3>Sprints:</h3>
+    @foreach (var sprint in Model.Sprints)
+    {
+        <p>@Html.ActionLink(@sprint.Name, "Details", "Sprints", new { id = sprint.SprintId }) | @sprint.StartDate | @sprint.EndDate</p>
+    }
+    <button type="button" class="createSprint" id="@Model.ProjectId">Create a Sprint</button>
+    <div id="sprintForm"></div>
+
+    <hr class="uk-divider-icon">
+    <p>@Html.ActionLink("Back to List", "Index")</p>
+
+    <p>@ViewBag.SprintTotal</p>
+    <div class="progress">
+        @foreach (var data in @ViewBag.SprintCollection)
+        {
+            @if (@data.Total >= 1 && @data.Total <= 10)
+            {
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                    @data.Name
+                </div>
+            }
+            @if (@data.Total >= 11 && @data.Total <= 29)
+            {
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                    @data.Name
+                </div>
+            }
+            @if (@data.Total >= 30 && @data.Total <= 49)
+            {
+                <div class="progress-bar progress-bar-info" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                    @data.Name
+                </div>
+            }
+            @if (@data.Total >= 50 && @data.Total <= 100)
+            {
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                    @data.Name
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>

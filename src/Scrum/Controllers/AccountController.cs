@@ -68,5 +68,9 @@ namespace Scrum.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
         }
+        public IActionResult UIKitTest()
+        {
+            return View();
+        }
     }
 }

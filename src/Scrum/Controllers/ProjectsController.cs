@@ -32,7 +32,14 @@ namespace Scrum.Controllers
             var currentUserId = currentUser.Id;
             ViewBag.CurrentUser = currentUser.UserName;
             ViewBag.Tasks = _db.Tasks.Where(t => t.UserId == currentUserId);
-            var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.UserStories).Include(projects => projects.ProjectTools).Include(projects => projects.Sprints).FirstOrDefault(projects => projects.ProjectId == Id);
+            var thisProject = _db.Projects.Include(projects => projects.Updates).Include(projects => projects.UserStories).Include(projects => projects.ProjectTools).Include(projects => projects.UserProjects).Include(projects => projects.Sprints).FirstOrDefault(projects => projects.ProjectId == Id);
+            List<string> teamMembers = new List<string>() { };
+            foreach(var join in thisProject.UserProjects)
+            {
+                var currentMember = await _userManager.FindByIdAsync(join.UserId);
+                teamMembers.Add(currentMember.UserName);
+            }
+            ViewBag.Team = teamMembers;
             ViewBag.ToolId = new SelectList(_db.Tools, "ToolId", "Name");
             var sprints = _db.Sprints.Where(s => s.Project == thisProject);
             double dayCount = 0;

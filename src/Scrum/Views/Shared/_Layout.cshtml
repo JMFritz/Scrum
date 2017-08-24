@@ -91,6 +91,22 @@
             });
         });
     </script>
+
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+
+            <a class="uk-navbar-item uk-logo" href="#">Logo</a>
+            <div class="uk-navbar-item">
+                <div><a asp-area="" asp-controller="Account" asp-action="Index">Home</a></div>
+            </div>
+            <div class="uk-navbar-item">
+                <div><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></div>
+            </div>
+            <div class="uk-navbar-item">
+                <div><a asp-area="" asp-controller="Tools" asp-action="Index">Toolbox</a></div>
+            </div>
+        </div>
+    </nav>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">

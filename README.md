@@ -10,12 +10,16 @@
 * add tools to projects
 * mark tasks complete
 * full crud for "Tasks" objects
+* progress bar for individual sprint to display task completion percentage
+* progress bar for individual project to display sprint length percentage
+
 
 #### To Do
 * update/task completion timeline diagram
-* project/sprint progress bar (dynamic based off amount of tasks)
-* full CRUD for updates, tools.
+* full CRUD for updates, tools
 * add roles to project (Product Owner, Scrum Master, Team Member)
 * style with scss
 * improve app flow
-* 
+* pie chart for incompleted tasks to display type of task
+* add MUI 
+* MARP presentation with screenshots/videos

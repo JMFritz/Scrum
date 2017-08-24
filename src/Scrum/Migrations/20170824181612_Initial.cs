@@ -194,6 +194,7 @@ namespace Scrum.Migrations
                     ProjectId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     userId = table.Column<string>(nullable: true)
@@ -257,6 +258,32 @@ namespace Scrum.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserProjects",
+                columns: table => new
+                {
+                    UserProjectId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProjectId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProjects", x => x.UserProjectId);
+                    table.ForeignKey(
+                        name: "FK_UserProjects_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserProjects_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserStories",
                 columns: table => new
                 {
@@ -310,8 +337,9 @@ namespace Scrum.Migrations
                     Description = table.Column<string>(nullable: true),
                     InProgress = table.Column<bool>(nullable: false),
                     PhaseId = table.Column<int>(nullable: false),
-                    ProjectId = table.Column<int>(nullable: true),
-                    SprintId = table.Column<int>(nullable: true)
+                    Priority = table.Column<string>(nullable: true),
+                    SprintId = table.Column<int>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -323,16 +351,16 @@ namespace Scrum.Migrations
                         principalColumn: "PhaseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tasks_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "ProjectId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Tasks_Sprints_SprintId",
                         column: x => x.SprintId,
                         principalTable: "Sprints",
                         principalColumn: "SprintId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tasks_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -445,14 +473,14 @@ namespace Scrum.Migrations
                 column: "PhaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ProjectId",
-                table: "Tasks",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_SprintId",
                 table: "Tasks",
                 column: "SprintId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tasks_UserId",
+                table: "Tasks",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tools_ToolTypeId",
@@ -477,6 +505,16 @@ namespace Scrum.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Updates_UserId",
                 table: "Updates",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProjects_ProjectId",
+                table: "UserProjects",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProjects_UserId",
+                table: "UserProjects",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -510,6 +548,9 @@ namespace Scrum.Migrations
 
             migrationBuilder.DropTable(
                 name: "Updates");
+
+            migrationBuilder.DropTable(
+                name: "UserProjects");
 
             migrationBuilder.DropTable(
                 name: "UserStories");

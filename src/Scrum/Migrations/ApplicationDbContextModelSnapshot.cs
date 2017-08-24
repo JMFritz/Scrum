@@ -236,7 +236,7 @@ namespace Scrum.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<int?>("ProjectId");
 
                     b.Property<DateTime>("StartDate");
 
@@ -351,6 +351,24 @@ namespace Scrum.Migrations
                     b.ToTable("UpdateTypes");
                 });
 
+            modelBuilder.Entity("Scrum.Models.UserProject", b =>
+                {
+                    b.Property<int>("UserProjectId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("UserProjectId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserProjects");
+                });
+
             modelBuilder.Entity("Scrum.Models.UserStory", b =>
                 {
                     b.Property<int>("UserStoryId")
@@ -428,8 +446,7 @@ namespace Scrum.Migrations
                 {
                     b.HasOne("Scrum.Models.Project", "Project")
                         .WithMany("Sprints")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Scrum.Models.Task", b =>
@@ -469,6 +486,18 @@ namespace Scrum.Migrations
                     b.HasOne("Scrum.Models.UpdateType", "UpdateType")
                         .WithMany("Updates")
                         .HasForeignKey("UpdateTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Scrum.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Scrum.Models.UserProject", b =>
+                {
+                    b.HasOne("Scrum.Models.Project", "Project")
+                        .WithMany("UserProjects")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Scrum.Models.ApplicationUser", "User")

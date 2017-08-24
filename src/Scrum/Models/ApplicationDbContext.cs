@@ -37,6 +37,7 @@ namespace Scrum.Models
         public virtual DbSet<UpdateType> UpdateTypes { get; set; }
         public virtual DbSet<ToolType> ToolTypes { get; set; }
         public virtual DbSet<ProjectTool> ProjectTools { get; set; }
+        public virtual DbSet<UserProject> UserProjects { get; set; }
         public virtual DbSet<UserStory> UserStories { get; set; }
         public virtual DbSet<Phase> Phases { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }

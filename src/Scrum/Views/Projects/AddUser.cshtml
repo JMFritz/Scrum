@@ -1,0 +1,11 @@
+﻿@model Scrum.Models.Project
+@{
+    ViewData["Title"] = "Project Team Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownList("UserId")
+    <input type="submit" value="Add Team Member" />
+}

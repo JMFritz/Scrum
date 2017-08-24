@@ -65,6 +65,22 @@ namespace Scrum.Controllers
             _db.SaveChanges();
             return RedirectToAction("Details");
         }
+        public IActionResult AddUser(int id)
+        {
+            ViewBag.UserId = new SelectList(_db.Users, "Id", "UserName");
+            return View();
+        }
+        [HttpPost, ActionName("AddUser")]
+        public IActionResult AddUserPost(int id, string userId)
+        {
+            var assignedUser = _db.Users.FirstOrDefault(u => u.Id == userId);
+            var newUserProject = new UserProject();
+            newUserProject.ProjectId = id;
+            newUserProject.UserId = assignedUser.Id;
+            _db.UserProjects.Add(newUserProject);
+            _db.SaveChanges();
+            return RedirectToAction("Details", "Projects", new { id = id });
+        }
         public IActionResult Create()
         {
             return View();

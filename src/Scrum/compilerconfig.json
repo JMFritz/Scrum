@@ -2,5 +2,17 @@
   {
     "outputFile": "wwwroot/css/Tools/index.css",
     "inputFile": "wwwroot/css/Tools/index.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Projects/Detail.css",
+    "inputFile": "wwwroot/css/Projects/Detail.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Main/Main.css",
+    "inputFile": "wwwroot/css/Main/Main.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/NewFolder/Ajax.css",
+    "inputFile": "wwwroot/css/NewFolder/Ajax.scss"
   }
 ]

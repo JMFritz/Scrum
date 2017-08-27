@@ -1,24 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Scrum";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Scrum.Models.Sprint
+<!doctype html>
 
-@model Scrum.Models.Sprint
-
-<div class="page">
-    <h2>New Project</h2>
-    @using (Html.BeginForm())
-    {
-        <p>Sprint Name</p>
-        @Html.TextBoxFor(model => model.Name)
-        <p>Sprint Goal</p>
-        @Html.TextBoxFor(model => model.Goal)
-        <p>Start Date</p>
-        @Html.EditorFor(model => model.StartDate)
-        <p>End Date</p>
-        @Html.EditorFor(model => model.EndDate)
-        <input type="submit" value="Add New Sprint" />
-    }
-</div>
-
-
+<html lang="en">
+<head>
+    <link href="~/css/NewFolder/Ajax.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page">
+        @using (Html.BeginForm())
+        {
+            <p>Sprint Name</p>
+            @Html.TextBoxFor(model => model.Name)
+            <p>Sprint Goal</p>
+            @Html.TextBoxFor(model => model.Goal)
+            <p>Start Date</p>
+            @Html.EditorFor(model => model.StartDate)
+            <p>End Date</p>
+            @Html.EditorFor(model => model.EndDate)
+            <input type="submit" value="Add New Sprint" />
+        }
+    </div>
+</body>
+</html>

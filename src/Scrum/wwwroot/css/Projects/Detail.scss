@@ -1,0 +1,24 @@
+﻿body {
+    a{
+    color: white;
+    &:hover{
+        text-decoration: none;
+        color: white;
+    }
+}
+}
+
+/*.projectInfo{
+    border: black solid 1px;
+}
+
+.teamInfo{
+    border: red solid 1px;
+}*/
+
+.view{
+    background-color: tomato;
+}
+.pilly{
+    background-color: pink;
+}

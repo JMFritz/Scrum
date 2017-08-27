@@ -1,9 +1,18 @@
 ﻿@model Scrum.Models.UserStory
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Spec)
-    @Html.EditorFor(model => model.Spec)
+<!doctype html>
 
-    <input type="submit" value="Submit User Story" />
-}
+<html lang="en">
+<head>
+    <link href="~/css/NewFolder/Ajax.css" rel="stylesheet" />
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(model => model.Spec)
+        @Html.EditorFor(model => model.Spec)
+
+        <input type="submit" value="Submit User Story" />
+    }
+</body>
+</html>

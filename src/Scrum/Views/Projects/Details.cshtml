@@ -10,9 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
 </head>
 <body>
+
     <ul class="uk-breadcrumb">
-        <li><a class = "uk-text-large uk-text-bold" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
-        <li><a href="#" class="uk-text-large uk-text-bold">@Model.Title</a></li>
+        <li>
+            
+        </li>
     </ul>
 
     <div uk-grid>
@@ -20,9 +22,39 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <h2>@Model.Title</h2>
                 <p>@Model.Description</p>
-                <p><button type="button" class="uk-button uk-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Task", "Create", "Tasks", new { id = Model.ProjectId })</button></p>
+                <p>
+                    <div class="uk-offcanvas-content">
+                    <button type="button" class="uk-button uk-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Task", "Create", "Tasks", new { id = Model.ProjectId })</button>
+                        <button class="uk-button uk-button-danger uk-margin-small-center " type="button" uk-toggle="target: #offcanvas-nav-stuff"><i class="fa fa-wrench uk-text-large uk-text-bold" aria-hidden="true"></i></button>
 
-            </div>
+                        <div id="offcanvas-nav-stuff" uk-offcanvas="flip: true; overlay: true">
+                            <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+                                <h2>Assigned to You @ViewBag.CurrentUser</h2>
+                                <table class="uk-table uk-table-justify uk-table-divider">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-width-small">Task</th>
+                                            <th>Status</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var task in @ViewBag.Tasks)
+                                        {
+                                            <tr>
+                                                <td>@task.Description</td>
+                                                <td>@task.Complete</td>
+                                                <td><button class="uk-button view" type="button">@Html.ActionLink("Work", "Details", "Tasks", new { id = @task.TaskId })</button></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </p>
+           </div>
         </div>
         <div class="uk-width-1-2 teamInfo">
             <div class="uk-card uk-card-default uk-card-body">
@@ -46,10 +78,11 @@
                     <li>
                         <h3>Project Updates/Comments</h3>
                         <p><button type="button" class="uk-button uk-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Update", "Create", "Updates", new { id = Model.ProjectId })</button></p>
-                        @foreach (var update in Model.Updates)
+                        @foreach (var update in @ViewBag.Updates)
                         {
                             <p>@update.Note</p>
                             <p>@update.TimeStamp</p>
+                            <p>@update.User</p>
                         }
                     </li>
                     <li>
@@ -119,7 +152,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var sprint in Model.Sprints)
+                        @foreach (var sprint in @ViewBag.Sprints)
                         {
                             <tr>
                                 <td>@sprint.Name</td>

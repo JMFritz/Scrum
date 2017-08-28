@@ -3,7 +3,6 @@
 
 <html lang="en">
 <head>
-    <title>The HTML5 Herald</title>    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/css/uikit.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js"></script>
@@ -11,41 +10,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
 </head>
 <body>
-    <div class="uk-offcanvas-content">
-
-        <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-nav-stuff">Your Stuff</button>
-
-        <div id="offcanvas-nav-stuff" uk-offcanvas="flip: true; overlay: true">
-            <div class="uk-offcanvas-bar uk-flex uk-flex-column">
-
-                <h2>Assigned to You @ViewBag.CurrentUser</h2>
-                <table class="uk-table uk-table-justify uk-table-divider">
-                    <thead>
-                        <tr>
-                            <th class="uk-width-small">Task</th>
-                            <th>Status</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var task in @ViewBag.Tasks)
-                        {
-                            <tr>
-                                <td>@task.Description</td>
-                                <td>@task.Complete</td>
-                                <td><button class="uk-button view" type="button">@Html.ActionLink("Work", "Details", "Tasks", new { id = @task.TaskId })</button></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
     <ul class="uk-breadcrumb">
-        <li><a href="#" class="uk-text-large uk-text-bold">Projects</a></li>
+        <li><a class = "uk-text-large uk-text-bold" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
         <li><a href="#" class="uk-text-large uk-text-bold">@Model.Title</a></li>
     </ul>
-    <button class="uk-button uk-button-default" title="Hello World" uk-tooltip>Hover</button>
 
     <div uk-grid>
         <div class="uk-width-1-2 projectInfo">

@@ -18,9 +18,9 @@
     </ul>
 
     <div uk-grid>
-        <div class="uk-width-1-2 projectInfo">
+        <div class="uk-width-3-4 projectInfo">
             <div class="uk-card uk-card-default uk-card-body">
-                <h2>@Model.Title</h2>
+                <h1 class="uk-heading-line uk-text-center"><span>@Model.Title</span></h1>
                 <p>@Model.Description</p>
                 <p>
                     <div class="uk-offcanvas-content">
@@ -44,7 +44,16 @@
                                         {
                                             <tr>
                                                 <td>@task.Description</td>
-                                                <td>@task.Complete</td>
+                                                <td>
+                                                    @if (@task.Complete)
+                                                    {
+                                                        <i class="fa fa-check" aria-hidden="true" style="font-size: 30px; color: green;"></i>
+                                                    }
+                                                    @if (!@task.Complete)
+                                                    {
+                                                        <i class="fa fa-times" aria-hidden="true" style="font-size: 30px; color: tomato;"></i>
+                                                    }
+                                                </td>
                                                 <td><button class="uk-button view" type="button">@Html.ActionLink("Work", "Details", "Tasks", new { id = @task.TaskId })</button></td>
                                             </tr>
                                         }
@@ -56,19 +65,25 @@
                 </p>
            </div>
         </div>
-        <div class="uk-width-1-2 teamInfo">
+        <div class="uk-width-1-4 teamInfo">
             <div class="uk-card uk-card-default uk-card-body">
-                <h3>Project Team Members</h3>
+                <h2 class="uk-heading-line uk-text-center"><span>Team</span></h2>
                 @foreach (var member in @ViewBag.Team)
                 {
-                    <p><i class="fa fa-user" aria-hidden="true"></i> @member</p>
+                    <p class="uk-text-center"><i class="fa fa-user" aria-hidden="true"></i> @member</p>
                 }
-                <p><button type="button" class="uk-button uk-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Team Member", "AddUser", new { id = Model.ProjectId})</button></p>
+                <p>
+                    <a href="@Url.Action("AddUser", "Projects", new { id = Model.ProjectId })">
+                        <button type="button" class="uk-button uk-button-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                </p>
             </div>
         </div>
         <div class="uk-width-1-2">
             <div class="uk-card uk-card-default uk-card-body">
-                <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+                <ul class="uk-subnav uk-subnav-pill uk-text-center" uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
                     <li><a href="#">Stream</a></li>
                     <li><a href="#">User Stories</a></li>
                     <li><a href="#">Tools</a></li>
@@ -76,8 +91,12 @@
 
                 <ul class="uk-switcher uk-margin">
                     <li>
-                        <h3>Project Updates/Comments</h3>
-                        <p><button type="button" class="uk-button uk-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Update", "Create", "Updates", new { id = Model.ProjectId })</button></p>
+                        <h3 class="uk-heading-line uk-text-center"><span>Update Stream</span></h3>
+                        <p><a href="@Url.Action("Create", "Updates", new { id = Model.ProjectId })">
+                            <button type="button" class="uk-button uk-button-primary">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </a></p>
                         @foreach (var update in @ViewBag.Updates)
                         {
                             @if (@update.UpdateType.Name == "Beef")
@@ -88,15 +107,15 @@
                                             <img class="uk-comment-avatar" src="~/images/download.jpg" width="30" height="30" alt="">
                                         </div>
                                         <div class="uk-width-expand">
-                                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@update.User</a></h4>
+                                            <h4 class="uk-comment-title uk-margin-remove uk-text-small"><a class="uk-link-reset" href="#">@update.User</a></h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li><a href="#">@update.TimeStamp</a></li>
-                                                <li><i class="fa fa-thumbs-down" aria-hidden="true"></i></li>
+                                                <li style="color: black;">@update.TimeStamp</li>
+                                                <li><i class="fa fa-thumbs-down" aria-hidden="true" style="color: black; font-size: 20px;"></i></li>
                                             </ul>
                                         </div>
                                     </header>
                                     <div class="uk-comment-body">
-                                        <p>@update.Note</p>
+                                        <p style="color: black;">@update.Note</p>
                                     </div>
                                 </article>
                             }
@@ -108,15 +127,15 @@
                                             <img class="uk-comment-avatar" src="~/images/download.jpg" width="30" height="30" alt="">
                                         </div>
                                         <div class="uk-width-expand">
-                                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@update.User</a></h4>
+                                            <h4 class="uk-comment-title uk-margin-remove uk-text-small"><a class="uk-link-reset" href="#">@update.User</a></h4>
                                             <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li><a href="#">@update.TimeStamp</a></li>
-                                                <li><i class="fa fa-scissors" aria-hidden="true"></i></li>
+                                                <li style="color: black;">@update.TimeStamp</li>
+                                                <li><i class="fa fa-scissors uk-text-large" aria-hidden="true" style="color: black; font-size: 20px;"></i></li>
                                             </ul>
                                         </div>
                                     </header>
                                     <div class="uk-comment-body">
-                                        <p>@update.Note</p>
+                                        <p style="color: black;">@update.Note</p>
                                     </div>
                                 </article>
                             }
@@ -128,15 +147,15 @@
                                             <img class="uk-comment-avatar" src="~/images/download.jpg" width="30" height="30" alt="">
                                         </div>
                                         <div class="uk-width-expand">
-                                            <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">@update.User</a></h4>
-                                            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                                                <li><a href="#">@update.TimeStamp</a></li>
-                                                <li><i class="fa fa-comment" aria-hidden="true"></i></li>
+                                            <h4 class="uk-comment-title uk-margin-remove uk-text-small"><a class="uk-link-reset" href="#">@update.User</a></h4>
+                                            <ul class="uk-comment-lead uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                                <li style="color: black;">@update.TimeStamp</li>
+                                                <li><i class="fa fa-comment" aria-hidden="true" style="color: black; font-size: 20px;"></i></li>
                                             </ul>
                                         </div>
                                     </header>
                                     <div class="uk-comment-body">
-                                        <p>@update.Note</p>
+                                        <p style="color: black;">@update.Note</p>
                                     </div>
                                 </article>
                             }
@@ -144,16 +163,18 @@
                         }
                     </li>
                     <li>
-                        <h3>User Stories</h3>
-                        @foreach (var story in Model.UserStories)
-                        {
-                            <p>@story.Spec</p>
-                        }
-                        <button type="button" class="uk-button uk-button-primary addStory" id="@Model.ProjectId">Add User Story</button>
+                        <h3 class="uk-heading-line uk-text-center"><span>User Stories</span></h3>
+                        <ul class="uk-list uk-list-striped">
+                            @foreach (var story in Model.UserStories)
+                            {
+                                <li>@story.Spec</li>
+                            }
+                        </ul>
+                        <button type="button" class="uk-button uk-button-primary addStory" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         <div id="storyForm"></div>
                     </li>
                     <li>
-                        <h3>Tools</h3>
+                        <h3 class="uk-heading-line uk-text-center"><span>Tools</span></h3>
                         @foreach (var join in Model.ProjectTools)
                         {
                             <p>@join.Tool.Name</p>
@@ -162,7 +183,7 @@
                         @using (Html.BeginForm())
                         {
                             @Html.DropDownList("ToolId")
-                            <input type="submit" value="Add Tool" class="uk-button uk-button-primary"/>
+                            <input type="submit" value="Add Tool" class="uk-button uk-button-primary" aria-hidden="true"/>
                         }
                     </li>
                 </ul>
@@ -170,7 +191,7 @@
         </div>
         <div class="uk-width-1-2">
             <div class="uk-card uk-card-default uk-card-body">
-                <h3>Sprints</h3>
+                <h2 class="uk-heading-line uk-text-center"><span>Sprints</span></h2>
                 <div class="progress">
                     @foreach (var data in @ViewBag.SprintCollection)
                     {
@@ -221,7 +242,7 @@
                         }
                     </tbody>
                 </table>
-                <button type="button" class="createSprint uk-button uk-button-primary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i> Sprint</button>
+                <button type="button" class="createSprint uk-button uk-button-primary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
                 <div id="sprintForm"></div>
             </div>
         </div>

@@ -98,7 +98,7 @@
 
             <a class="uk-navbar-item uk-logo" href="#">Logo</a>
             <div class="uk-navbar-item">
-                <div><a asp-area="" asp-controller="Account" asp-action="Index">Home</a></div>
+
             </div>
             <div class="uk-navbar-item">
                 <div><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></div>
@@ -109,7 +109,22 @@
         </div>
     </nav>
     <div class="container body-content">
-        @RenderBody()
+        <div class="uk-offcanvas-content">
+
+            <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-nav-primary">Primary Nav</button>
+
+            <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
+                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+                    <ul class="uk-nav uk-nav-primary uk-nav-center">
+                        <li class="uk-parent"><a asp-area="" asp-controller="Account" asp-action="Index">Home</a></li>
+                        <li class="uk-parent"><a asp-area="" asp-controller="Projects" asp-action="Index">All Projects</a></li>
+                        <li class="uk-parent"><a asp-area="" asp-controller="Tools" asp-action="Index">Toolbox</a></li>
+                    </ul>
+                </div>
+            </div>
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

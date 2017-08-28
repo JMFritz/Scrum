@@ -1,4 +1,12 @@
 ### PRIORITY
+* add full crud for sprints/tasks/userstories/tools/tasks
+* improve app flow
+* style individual tasks page/ add more detail to model (estimated time, difficulty level)
+* finish project detail page
+* style sprint detail page
+* add github api to log in to github/gain access to project repository/commit and make changes with github (further exploration)
+* pie chart???????
+* reduce amount of buttons/ add user friendly icons
 
 #### Completed:
 * create project

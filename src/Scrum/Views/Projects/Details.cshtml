@@ -175,7 +175,7 @@
                     </li>
                     <li>
                         <h3 class="uk-heading-line uk-text-center"><span>Tools</span></h3>
-                        @foreach (var join in Model.ProjectTools)
+                        @foreach (var join in @ViewBag.ProjectTools)
                         {
                             <p>@join.Tool.Name</p>
                         }

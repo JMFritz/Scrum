@@ -37,6 +37,7 @@ namespace Scrum.Controllers
             var projectUpdates = _db.Updates.Include(u => u.UpdateType).Where(u => u.Project == thisProject);
             ViewBag.Updates = projectUpdates.OrderByDescending(u => u.TimeStamp);
             ViewBag.Sprints = thisProject.Sprints.OrderByDescending(s => s.StartDate);
+            ViewBag.ProjectTools = _db.ProjectTools.Include(p => p.Tool).Where(p => p.Project == thisProject);
             List<string> teamMembers = new List<string>() { };
             foreach(var join in thisProject.UserProjects)
             {

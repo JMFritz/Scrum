@@ -11,9 +11,12 @@
 .teamInfo{
     border: red solid 1px;
 }*/
-.view {
-  background-color: tomato; }
+.view a {
+  color: black; }
 
 .pilly {
   background-color: pink; }
+
+#Beef {
+  background-color: black; }
 

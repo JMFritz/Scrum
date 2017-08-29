@@ -4,21 +4,29 @@
     ViewData["Title"] = "Task - Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div uk-grid>
+    <div class="uk-width-1-2">
+        <div class="uk-card uk-card-default uk-card-body">
+            <h2>Task Details</h2>
 
-<h2>Task Details</h2>
+            <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+            <p>@Html.DisplayNameFor(model => model.Priority) : @Html.DisplayFor(model => model.Priority)</p>
+            <p>@Html.DisplayNameFor(model => model.Complete) : @Html.DisplayFor(model => model.Complete)</p>
+        </div>
+    </div>
+    <div class="uk-width-1-4">
+        <div class="uk-card uk-card-default uk-card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(model => model.TaskId)
+                <input type="submit" value="Completed" />
+            }
+        </div>
+    </div>
+</div>
 
-<p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
-<p>@Html.DisplayNameFor(model => model.Priority) : @Html.DisplayFor(model => model.Priority)</p>
-<p>@Html.DisplayNameFor(model => model.Complete) : @Html.DisplayFor(model => model.Complete)</p>
+            <button type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
+            <div id="editTask"></div>
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.TaskId)
-    <input type="submit" value="Completed" />
-}
-
-<button type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
-<div id="editTask"></div>
-
-<p>@Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.TaskId })</p>
-<p>@Html.ActionLink("Assign", "Assign", "Tasks", new { id = Model.TaskId })</p>
+            <p>@Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.TaskId })</p>
+            <p>@Html.ActionLink("Assign", "Assign", "Tasks", new { id = Model.TaskId })</p>

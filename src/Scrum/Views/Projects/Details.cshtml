@@ -10,13 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
 </head>
 <body>
-
-    <ul class="uk-breadcrumb">
-        <li>
-            
-        </li>
-    </ul>
-
     <div uk-grid>
         <div class="uk-width-3-4 projectInfo">
             <div class="uk-card uk-card-default uk-card-body">
@@ -24,8 +17,8 @@
                 <p>@Model.Description</p>
                 <p>
                     <div class="uk-offcanvas-content">
-                    <button type="button" class="uk-button uk-button-primary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Task", "Create", "Tasks", new { id = Model.ProjectId })</button>
-                        <button class="uk-button uk-button-danger uk-margin-small-center " type="button" uk-toggle="target: #offcanvas-nav-stuff"><i class="fa fa-wrench uk-text-large uk-text-bold" aria-hidden="true"></i></button>
+                    <button type="button" class="uk-button uk-button-secondary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Task", "Create", "Tasks", new { id = Model.ProjectId })</button>
+                        <button class="uk-button uk-button-secondary uk-margin-small-center " type="button" uk-toggle="target: #offcanvas-nav-stuff"><i class="fa fa-wrench uk-text-large uk-text-bold" aria-hidden="true"></i></button>
 
                         <div id="offcanvas-nav-stuff" uk-offcanvas="flip: true; overlay: true">
                             <div class="uk-offcanvas-bar uk-flex uk-flex-column">
@@ -74,7 +67,7 @@
                 }
                 <p>
                     <a href="@Url.Action("AddUser", "Projects", new { id = Model.ProjectId })">
-                        <button type="button" class="uk-button uk-button-primary">
+                        <button type="button" class="uk-button uk-button-secondary">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                     </a>
@@ -93,7 +86,7 @@
                     <li>
                         <h3 class="uk-heading-line uk-text-center"><span>Update Stream</span></h3>
                         <p><a href="@Url.Action("Create", "Updates", new { id = Model.ProjectId })">
-                            <button type="button" class="uk-button uk-button-primary">
+                            <button type="button" class="uk-button uk-button-secondary">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </a></p>
@@ -170,7 +163,7 @@
                                 <li>@story.Spec</li>
                             }
                         </ul>
-                        <button type="button" class="uk-button uk-button-primary addStory" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <button type="button" class="uk-button uk-button-secondary addStory" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         <div id="storyForm"></div>
                     </li>
                     <li>
@@ -183,7 +176,7 @@
                         @using (Html.BeginForm())
                         {
                             @Html.DropDownList("ToolId")
-                            <input type="submit" value="Add Tool" class="uk-button uk-button-primary" aria-hidden="true"/>
+                            <input type="submit" value="Add Tool" class="uk-button uk-button-secondary" aria-hidden="true"/>
                         }
                     </li>
                 </ul>
@@ -197,25 +190,25 @@
                     {
                         @if (@data.Total >= 1 && @data.Total <= 10)
                         {
-                            <div class="progress-bar progress-bar-primary" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@data.Total%; border:solid 1px black; background-color: #FF9999; color: black;">
                                 @data.Name
                             </div>
                         }
                         @if (@data.Total >= 11 && @data.Total <= 29)
                         {
-                            <div class="progress-bar progress-bar-warning" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" style="width:@data.Total%; border:solid 1px black; background-color: lightyellow; color: black;">
                                 @data.Name
                             </div>
                         }
-                        @if (@data.Total >= 30 && @data.Total <= 49)
+                        @if (@data.Total >= 30 && @data.Total <= 69)
                         {
-                            <div class="progress-bar progress-bar-info" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                            <div class="progress-bar progress-bar-info" role="progressbar" style="width:@data.Total%; border:solid 1px black; background-color: aliceblue; color: black;">
                                 @data.Name
                             </div>
                         }
-                        @if (@data.Total >= 50 && @data.Total <= 100)
+                        @if (@data.Total >= 70 && @data.Total <= 100)
                         {
-                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:@data.Total%; border:solid 1px black">
+                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:@data.Total%; border:solid 1px black; background-color: green; color: black;">
                                 @data.Name
                             </div>
                         }
@@ -237,12 +230,12 @@
                                 <td>@sprint.Name</td>
                                 <td>@sprint.StartDate</td>
                                 <td>@sprint.EndDate</td>
-                                <td><button class="uk-button view" type="button">@Html.ActionLink("View", "Details", "Sprints", new { id = sprint.SprintId })</button></td>
+                                <td><button class="uk-button uk-button-default view" type="button" style="color: black;">@Html.ActionLink("View", "Details", "Sprints", new { id = sprint.SprintId })</button></td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                <button type="button" class="createSprint uk-button uk-button-primary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button type="button" class="createSprint uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
                 <div id="sprintForm"></div>
             </div>
         </div>

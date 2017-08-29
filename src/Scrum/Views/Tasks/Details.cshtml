@@ -11,11 +11,19 @@
 
             <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
             <p>@Html.DisplayNameFor(model => model.Priority) : @Html.DisplayFor(model => model.Priority)</p>
-            <p>@Html.DisplayNameFor(model => model.Complete) : @Html.DisplayFor(model => model.Complete)</p>
+
         </div>
     </div>
-    <div class="uk-width-1-4">
-        <div class="uk-card uk-card-default uk-card-body">
+    <div class="uk-width-1-4" style="width: 200px;">
+        <div class="uk-card uk-card-default uk-card-body uk-text-center">
+            @if (@Model.Complete)
+            {
+                <i class="fa fa-check" aria-hidden="true" style="font-size: 50px; color: green;"></i>
+            }
+            @if (!@Model.Complete)
+            {
+                <i class="fa fa-times" aria-hidden="true" style="font-size: 50px; color: tomato;"></i>
+            }
             @using (Html.BeginForm())
             {
                 @Html.HiddenFor(model => model.TaskId)
@@ -23,10 +31,15 @@
             }
         </div>
     </div>
-</div>
-
+    <div class="uk-width-1-4">
+        <div class="uk-card uk-card-default uk-card-body">
             <button type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
             <div id="editTask"></div>
 
             <p>@Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.TaskId })</p>
             <p>@Html.ActionLink("Assign", "Assign", "Tasks", new { id = Model.TaskId })</p>
+        </div>
+    </div>
+</div>
+
+

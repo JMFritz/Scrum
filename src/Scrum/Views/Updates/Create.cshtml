@@ -1,16 +1,21 @@
 ﻿@model Scrum.Models.Update
 
-@{
-    ViewData["Title"] = "Update - Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<!doctype html>
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Note)
-    @Html.EditorFor(model => model.Note)
+<html lang="en">
+<head>
+    <link href="~/css/NewFolder/Ajax.css" rel="stylesheet" />
+</head>
+<body>
 
-    @Html.DropDownList("UpdateTypeId")
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(model => model.Note)
+        @Html.EditorFor(model => model.Note)
 
-    <input type="submit" value="Add Update" />
-}
+        @Html.DropDownList("UpdateTypeId")
+
+        <input type="submit" value="Add Update" />
+    }
+</body>
+</html>

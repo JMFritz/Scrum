@@ -85,11 +85,8 @@
                 <ul class="uk-switcher uk-margin">
                     <li>
                         <h3 class="uk-heading-line uk-text-center"><span>Update Stream</span></h3>
-                        <p><a href="@Url.Action("Create", "Updates", new { id = Model.ProjectId })">
-                            <button type="button" class="uk-button uk-button-secondary">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </a></p>
+                        <button type="button" class="createUpdate uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <div id="createForm"></div>
                         @foreach (var update in @ViewBag.Updates)
                         {
                             @if (@update.UpdateType.Name == "Beef")

@@ -109,5 +109,10 @@ namespace Scrum.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //public IActionResult Edit(int id)
+        //{
+
+        //}
     }
 }

@@ -77,6 +77,19 @@
                     }
                 });
             });
+            $('.createUpdate').click(function () {
+                clicked = $(this)[0].id;
+                clicked = parseInt(clicked);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'html',
+                    data: { id: clicked },
+                    url: '@Url.Action("Create","Updates")',
+                    success: function (result) {
+                        $('#createForm').html(result);
+                    }
+                });
+            });
             $('.editTaskForm').click(function () {
                 clicked = $(this)[0].id;
                 clicked = parseInt(clicked);
@@ -93,22 +106,39 @@
         });
     </script>
     <div class="container body-content">
-        <div class="uk-offcanvas-content">
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left">
 
-            <button class="uk-button uk-button-default uk-margin-small-center navbutton" type="button" uk-toggle="target: #offcanvas-nav-primary"><i class="fa fa-bars uk-text-large uk-text-bold" aria-hidden="true"></i></button>
+                <ul class="uk-navbar-nav">
+                    <li class="uk-parent"><a asp-area="" asp-controller="Account" asp-action="Index">Home</a></li>
+                    <li class="uk-parent"><a asp-area="" asp-controller="Projects" asp-action="Index">All Projects</a></li>
+                    <li class="uk-parent"><a asp-area="" asp-controller="Tools" asp-action="Index">Toolbox</a></li>
+                </ul>
 
-            <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
-                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
-
-                    <ul class="uk-nav uk-nav-primary uk-nav-center">
-                        <li class="uk-parent"><a asp-area="" asp-controller="Account" asp-action="Index">Home</a></li>
-                        <li class="uk-parent"><a asp-area="" asp-controller="Projects" asp-action="Index">All Projects</a></li>
-                        <li class="uk-parent"><a asp-area="" asp-controller="Tools" asp-action="Index">Toolbox</a></li>
-                    </ul>
-                </div>
             </div>
+            <div class="uk-navbar-right">
+
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="#">Parent</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active"><a href="#">Active</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-header">Header</li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a href="#">Item</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
             @RenderBody()
-        </div>
+
     </div>
 </body>
 </html>

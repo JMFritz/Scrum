@@ -1,30 +1,34 @@
 ﻿@model Scrum.Models.Task
-@{
-    ViewData["Title"] = "Task - Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<!doctype html>
 
-<h2>New Task</h2>
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Description)
-    @Html.EditorFor(model => model.Description)
+<html lang="en">
+<head>
+    <link href="~/css/NewFolder/Ajax.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(model => model.Description)
+        @Html.EditorFor(model => model.Description)
 
-    @Html.LabelFor(model => model.Complete)
-    @Html.EditorFor(model => model.Complete)
+        @Html.LabelFor(model => model.Complete)
+        @Html.EditorFor(model => model.Complete)
 
-    @Html.DropDownList("PhaseId")
+        @Html.DropDownList("PhaseId")
 
-    @Html.DropDownList("UserId")
+        @Html.DropDownList("UserId")
 
-    <select asp-for="Priority">
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-        <option value="Block">Block</option>
-        <option value="Bug">Bug</option>
-    </select>
+        <select asp-for="Priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+            <option value="Block">Block</option>
+            <option value="Bug">Bug</option>
+        </select>
 
 
-    <input type="submit" value="Add Task" />
-}
+        <input type="submit" value="Add Task" />
+    }
+</body>
+</html>

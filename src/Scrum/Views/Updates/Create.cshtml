@@ -7,15 +7,17 @@
     <link href="~/css/NewFolder/Ajax.css" rel="stylesheet" />
 </head>
 <body>
-
+    <br />
+    <br />
     @using (Html.BeginForm())
     {
-        @Html.LabelFor(model => model.Note)
-        @Html.EditorFor(model => model.Note)
+        <div style="">
+            @Html.EditorFor(model => model.Note)
+            <br />
+            @Html.DropDownList("UpdateTypeId")
 
-        @Html.DropDownList("UpdateTypeId")
-
-        <input type="submit" value="Add Update" />
+            <input type="submit" value="Add Update" />
+        </div>
     }
 </body>
 </html>

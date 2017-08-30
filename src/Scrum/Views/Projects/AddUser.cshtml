@@ -1,12 +1,21 @@
 ﻿@model Scrum.Models.Project
-@{
-    ViewData["Title"] = "Project Team Members";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<!doctype html>
 
-@using (Html.BeginForm())
-{
-    @Html.DropDownList("UserId")
-    <input type="submit" value="Add Team Member" />
-}
-
+<html lang="en">
+<head>
+    <link href="~/css/NewFolder/Ajax.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    @using (Html.BeginForm())
+    {
+        <div style="padding-left: 10px;">
+            <div style="padding-left: 20px;">
+                @Html.DropDownList("UserId")
+            </div>
+            <br />
+            <input type="submit" value="Add Team Member" />
+        </div>
+    }
+</body>
+</html>

@@ -17,61 +17,64 @@
                 <p>@Model.Description</p>
                 <p>
                     <div class="uk-offcanvas-content">
-                    <button type="button" class="uk-button uk-button-secondary"><i class="fa fa-plus" aria-hidden="true"></i> @Html.ActionLink("Task", "Create", "Tasks", new { id = Model.ProjectId })</button>
-                        <button class="uk-button uk-button-secondary uk-margin-small-center " type="button" uk-toggle="target: #offcanvas-nav-stuff"><i class="fa fa-wrench uk-text-large uk-text-bold" aria-hidden="true"></i></button>
+                        <div class="uk-text-center">
+                            <button type="button" class="addTask uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus " aria-hidden="true"></i></button>
 
-                        <div id="offcanvas-nav-stuff" uk-offcanvas="flip: true; overlay: true">
-                            <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+                            <button class="uk-button uk-button-secondary uk-margin-small-center " type="button" uk-toggle="target: #offcanvas-nav-stuff"><i class="fa fa-wrench uk-text-large" style="font-size: 20px;" aria-hidden="true"></i></button>
 
-                                <h2>Assigned to You @ViewBag.CurrentUser</h2>
-                                <table class="uk-table uk-table-justify uk-table-divider">
-                                    <thead>
-                                        <tr>
-                                            <th class="uk-width-small">Task</th>
-                                            <th>Status</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var task in @ViewBag.Tasks)
-                                        {
+                            <div id="offcanvas-nav-stuff" uk-offcanvas="flip: true; overlay: true">
+                                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+                                    <h2>Assigned to You @ViewBag.CurrentUser</h2>
+                                    <table class="uk-table uk-table-justify uk-table-divider">
+                                        <thead>
                                             <tr>
-                                                <td>@task.Description</td>
-                                                <td>
-                                                    @if (@task.Complete)
-                                                    {
-                                                        <i class="fa fa-check" aria-hidden="true" style="font-size: 30px; color: green;"></i>
-                                                    }
-                                                    @if (!@task.Complete)
-                                                    {
-                                                        <i class="fa fa-times" aria-hidden="true" style="font-size: 30px; color: tomato;"></i>
-                                                    }
-                                                </td>
-                                                <td><button class="uk-button view" type="button">@Html.ActionLink("Work", "Details", "Tasks", new { id = @task.TaskId })</button></td>
+                                                <th class="uk-width-small">Task</th>
+                                                <th>Status</th>
+                                                <th>Details</th>
                                             </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var task in @ViewBag.Tasks)
+                                            {
+                                                <tr>
+                                                    <td>@task.Description</td>
+                                                    <td>
+                                                        @if (@task.Complete)
+                                                        {
+                                                            <i class="fa fa-check" aria-hidden="true" style="font-size: 30px; color: green;"></i>
+                                                        }
+                                                        @if (!@task.Complete)
+                                                        {
+                                                            <i class="fa fa-times" aria-hidden="true" style="font-size: 30px; color: tomato;"></i>
+                                                        }
+                                                    </td>
+                                                    <td><button class="uk-button view" type="button">@Html.ActionLink("Work", "Details", "Tasks", new { id = @task.TaskId })</button></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div id="taskForm"></div>
                 </p>
            </div>
         </div>
         <div class="uk-width-1-4 teamInfo">
             <div class="uk-card uk-card-default uk-card-body">
-                <h2 class="uk-heading-line uk-text-center"><span>Team</span></h2>
-                @foreach (var member in @ViewBag.Team)
-                {
-                    <p class="uk-text-center"><i class="fa fa-user" aria-hidden="true"></i> @member</p>
-                }
-                <p>
-                    <a href="@Url.Action("AddUser", "Projects", new { id = Model.ProjectId })">
-                        <button type="button" class="uk-button uk-button-secondary">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                        </button>
-                    </a>
-                </p>
+                <div class="uk-text-center">
+                    <h2 class="uk-heading-line"><span>Team</span></h2>
+                    @foreach (var member in @ViewBag.Team)
+                    {
+                        <p class="uk-text-center"><i class="fa fa-user" aria-hidden="true"></i> @member</p>
+                    }
+                    <p>
+                        <button type="button" class="uk-button uk-button-secondary addTeamMember uk-text-center" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </p>
+                </div>
+                <div id="userForm"></div>
             </div>
         </div>
         <div class="uk-width-1-2">
@@ -84,9 +87,13 @@
 
                 <ul class="uk-switcher uk-margin">
                     <li>
-                        <h3 class="uk-heading-line uk-text-center"><span>Update Stream</span></h3>
-                        <button type="button" class="createUpdate uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <div class="uk-text-center">
+                            <h3 class="uk-heading-line uk-text-center"><span>Update Stream</span></h3>
+                            <button type="button" class="createUpdate uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus " aria-hidden="true"></i></button>
+                        </div>
                         <div id="createForm"></div>
+                        <br />
+                        <br />  
                         @foreach (var update in @ViewBag.Updates)
                         {
                             @if (@update.UpdateType.Name == "Beef")
@@ -160,7 +167,9 @@
                                 <li>@story.Spec</li>
                             }
                         </ul>
-                        <button type="button" class="uk-button uk-button-secondary addStory" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <div class="uk-text-center">
+                            <button type="button" class="uk-button uk-button-secondary addStory" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
                         <div id="storyForm"></div>
                     </li>
                     <li>
@@ -169,12 +178,14 @@
                         {
                             <p>@join.Tool.Name</p>
                         }
-                        <h3>Add New Tool</h3>
-                        @using (Html.BeginForm())
-                        {
-                            @Html.DropDownList("ToolId")
-                            <input type="submit" value="Add Tool" class="uk-button uk-button-secondary" aria-hidden="true"/>
-                        }
+                        <div class="uk-text-center">
+                            <h3>Add New Tool</h3>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.DropDownList("ToolId")
+                                <input type="submit" value="Add Tool" class="uk-button uk-button-secondary" aria-hidden="true"/>
+                            }
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -232,7 +243,9 @@
                         }
                     </tbody>
                 </table>
-                <button type="button" class="createSprint uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <div class="uk-text-center">
+                    <button type="button" class="createSprint uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
                 <div id="sprintForm"></div>
             </div>
         </div>

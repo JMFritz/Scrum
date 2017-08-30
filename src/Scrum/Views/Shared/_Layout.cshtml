@@ -90,6 +90,19 @@
                     }
                 });
             });
+            $('.addTeamMember').click(function () {
+                clicked = $(this)[0].id;
+                clicked = parseInt(clicked);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'html',
+                    data: { id: clicked },
+                    url: '@Url.Action("AddUser","Projects")',
+                    success: function (result) {
+                        $('#userForm').html(result);
+                    }
+                });
+            });
             $('.editTaskForm').click(function () {
                 clicked = $(this)[0].id;
                 clicked = parseInt(clicked);
@@ -103,10 +116,23 @@
                     }
                 });
             });
+            $('.addTask').click(function () {
+                clicked = $(this)[0].id;
+                clicked = parseInt(clicked);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'html',
+                    data: { id: clicked },
+                    url: '@Url.Action("Create", "Tasks")',
+                    success: function (result) {
+                        $('#taskForm').html(result);
+                    }
+                });
+            });
         });
     </script>
     <div class="container body-content">
-        <nav class="uk-navbar-container" uk-navbar>
+        <nav class="uk-navbar-container" id="navBizBar" uk-navbar>
             <div class="uk-navbar-left">
 
                 <ul class="uk-navbar-nav">

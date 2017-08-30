@@ -78,9 +78,9 @@
             </div>
         </div>
         <div class="uk-width-1-2">
-            <div class="uk-card uk-card-default uk-card-body">
+            <div class="uk-card uk-card-default uk-card-body uk-text-center">
                 <ul class="uk-subnav uk-subnav-pill uk-text-center" uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
-                    <li><a href="#">Stream</a></li>
+                    <li><a href="#">Updates</a></li>
                     <li><a href="#">User Stories</a></li>
                     <li><a href="#">Tools</a></li>
                 </ul>
@@ -88,7 +88,6 @@
                 <ul class="uk-switcher uk-margin">
                     <li>
                         <div class="uk-text-center">
-                            <h3 class="uk-heading-line uk-text-center"><span>Update Stream</span></h3>
                             <button type="button" class="createUpdate uk-button uk-button-secondary" id="@Model.ProjectId"><i class="fa fa-plus " aria-hidden="true"></i></button>
                         </div>
                         <div id="createForm"></div>
@@ -160,7 +159,6 @@
                         }
                     </li>
                     <li>
-                        <h3 class="uk-heading-line uk-text-center"><span>User Stories</span></h3>
                         <ul class="uk-list uk-list-striped">
                             @foreach (var story in Model.UserStories)
                             {
@@ -173,7 +171,6 @@
                         <div id="storyForm"></div>
                     </li>
                     <li>
-                        <h3 class="uk-heading-line uk-text-center"><span>Tools</span></h3>
                         @foreach (var join in @ViewBag.ProjectTools)
                         {
                             <p>@join.Tool.Name</p>

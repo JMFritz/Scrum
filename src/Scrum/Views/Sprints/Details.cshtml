@@ -4,30 +4,41 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Sprint Details</h2>
-<h3>@Model.Name</h3>
-<h3>@Model.Goal</h3>
-<h3>@Model.StartDate</h3>
-<h3>@Model.EndDate</h3>
-
-@using (Html.BeginForm())
-{
-    @Html.DropDownList("TaskId")
-    <input type="submit" value="AddTask" />
-}
-
-@foreach(var task in Model.Tasks)
-{
-    <div class="done-@task.Complete">
-        <p>@Html.ActionLink(@task.Description, "Details", "Tasks", new { id = @task.TaskId })</p>
+<div class="uk-text-center" uk-grid>
+    <div class="uk-width-2-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+            <h1 class="uk-heading-line uk-text-center"><span>@Model.Name</span></h1>
+            <h3>@Model.Goal</h3>
+        </div>
     </div>
-}
+    <div class="uk-width-1-3@m">
+        <div class="uk-card uk-card-default uk-card-body">
+            <h2 class="uk-heading-line uk-text-center"><span>Days Left</span></h2>
+            <h1>@ViewBag.DaysLeft</h1>
+        </div>
+    </div>
+    <h3>@Model.StartDate - @Model.EndDate</h3>
+    <h3>@Model.EndDate</h3>
 
-<p>@ViewBag.Current</p>
+    @using (Html.BeginForm())
+            {
+        @Html.DropDownList("TaskId")
+        <input type="submit" value="AddTask" />
+    }
 
-<div class="progress">
-    <div class="progress-bar progress-bar-info" role="progressbar"
-         aria-valuenow="@ViewBag.Current" aria-valuemin="0" aria-valuemax="100" style="width:@ViewBag.Current%">
-        @ViewBag.Current% Complete
+    @foreach (var task in Model.Tasks)
+            {
+        <div class="done-@task.Complete">
+            <p>@Html.ActionLink(@task.Description, "Details", "Tasks", new { id = @task.TaskId })</p>
+        </div>
+    }
+
+    <p>@ViewBag.Current</p>
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-info" role="progressbar"
+             aria-valuenow="@ViewBag.Current" aria-valuemin="0" aria-valuemax="100" style="width:@ViewBag.Current%">
+            @ViewBag.Current% Complete
+        </div>
     </div>
 </div>

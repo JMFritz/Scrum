@@ -37,6 +37,8 @@ namespace Scrum.Controllers
             var taskList = _db.Tasks.Where(t => t.Project == thisProject);
             ViewBag.TaskId = new SelectList(taskList, "TaskId", "Description");
             ViewBag.Current = currentPercent;
+            var dateNow = DateTime.Now;
+            ViewBag.DaysLeft = Math.Round((thisSprint.EndDate - dateNow).TotalDays);
             return View(thisSprint);
         }
         [HttpPost, ActionName("Details")]

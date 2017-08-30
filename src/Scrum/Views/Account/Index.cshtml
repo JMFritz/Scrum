@@ -5,21 +5,27 @@
 
 @using System.Security.Claims
 
-<h2>Authentication with Identity</h2>
-<hr />
 @if (User.Identity.IsAuthenticated)
 {
-    <p>Hello @User.Identity.Name!</p>
-    @using (Html.BeginForm("LogOff", "Account"))
-    {
-        @Html.ActionLink("test UIKIT", "UIKitTest")
-        <input type="submit" class="btn btn-default" value="Log out" />
-    }
+    <div class="uk-width-1-2" style="height: auto;margin: 0 auto;padding: 10px;position: relative;">
+        <div class="uk-card uk-card-default uk-card-body uk-text-center">
+            <h1>@User.Identity.Name</h1>
+            @using (Html.BeginForm("LogOff", "Account"))
+            {
+                <input type="submit" class="btn btn-default" value="Log out" />
+            }
+        </div>
+    </div>
 }
 else
 {
-    <button type="button" id="register">Register</button>
-    <button type="button" id="login">Login</button>
+    <div class="uk-width-1-2" style="height: auto;margin: 0 auto;padding: 10px;position: relative;">
+        <div class="uk-card uk-card-default uk-card-body uk-text-center">
+             <h1>Scrum Project</h1>
+            <button type="button" id="register">Register</button>
+            <button type="button" id="login">Login</button>
+        </div>
+    </div>
 }
 
 <div id="accessForm"></div>

@@ -1,7 +1,7 @@
 ﻿@model Scrum.Models.Sprint
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sprint";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="uk-text-center" uk-grid>
@@ -51,7 +51,7 @@
                             @if (!@task.Complete && !@task.InProgress)
                             {
                                 <div class="uk-margin">
-                                    <div class="uk-card uk-card-default uk-card-body uk-card-small"><i class="fa fa-times" aria-hidden="true" style="font-size: 20px; color: tomato;"></i> @task.Description</div>
+                                    <div class="uk-card uk-card-default uk-card-body uk-card-small"><i class="fa fa-times" aria-hidden="true" style="font-size: 20px; color: tomato;"></i> @Html.ActionLink(@task.Description, "Details", "Tasks", new { id = @task.TaskId })</div>
                                 </div>
                             }
                         }
@@ -65,7 +65,7 @@
                             @if ((@task.InProgress) && (!@task.Complete))
                             {
                                 <div class="uk-margin">
-                                    <div class="uk-card uk-card-default uk-card-body uk-card-small"><i class="fa fa-briefcase" aria-hidden="true" style="font-size: 20px; color: blue;"></i> @task.Description</div>
+                                    <div class="uk-card uk-card-default uk-card-body uk-card-small"><i class="fa fa-briefcase" aria-hidden="true" style="font-size: 20px; color: blue;"></i> @Html.ActionLink(@task.Description, "Details", "Tasks", new { id = @task.TaskId })</div>
                                 </div>
                             }
                         }
@@ -79,7 +79,7 @@
                         @if (@task.Complete)
                         {
                             <div class="uk-margin">
-                                <div class="uk-card uk-card-default uk-card-body uk-card-small"><i class="fa fa-check" aria-hidden="true" style="font-size: 20px; color: green;"></i> @task.Description</div>
+                                <div class="uk-card uk-card-default uk-card-body uk-card-small"><i class="fa fa-check" aria-hidden="true" style="font-size: 20px; color: green;"></i> @Html.ActionLink(@task.Description, "Details", "Tasks", new { id = @task.TaskId })</div>
                             </div>
                         }
                     }

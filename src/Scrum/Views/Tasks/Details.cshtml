@@ -5,16 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div uk-grid>
-    <div class="uk-width-1-4">
+    <div class="uk-width-1-2">
         <div class="uk-card uk-card-default uk-card-body">
-            <h2>Task Details</h2>
-
-            <p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+            <h2>@Model.Description</h2>
             <p>@Html.DisplayNameFor(model => model.Priority) : @Html.DisplayFor(model => model.Priority)</p>
-
         </div>
     </div>
-    <div class="uk-width-1-4" style="width: 200px;">
+    <div class="uk-width-1-4">
         <div class="uk-card uk-card-default uk-card-body uk-text-center">
             @if (@Model.Complete)
             {
@@ -33,11 +30,10 @@
     </div>
     <div class="uk-width-1-4">
         <div class="uk-card uk-card-default uk-card-body">
-            <button type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
+            <button class="uk-button uk-button-secondary uk-margin-small-center" type="button">@Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.TaskId})</button>
+            <hr />
+            <button class="uk-button uk-button-secondary uk-margin-small-center" type="button" class="editTaskForm" id="@Model.TaskId">Edit This Task</button>
             <div id="editTask"></div>
-
-            <p>@Html.ActionLink("Delete", "Delete", "Tasks", new { id = Model.TaskId })</p>
-            <p>@Html.ActionLink("Assign", "Assign", "Tasks", new { id = Model.TaskId })</p>
         </div>
     </div>
 </div>

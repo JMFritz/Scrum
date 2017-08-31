@@ -1,0 +1,90 @@
+﻿ USE [Scrum]
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName]) VALUES (N'5f8395a6-21cf-4185-b254-fabcd56a48e6', 0, N'1e20ef1a-a4e3-49c7-a74d-19092c4700d4', NULL, 0, 1, NULL, NULL, N'KIM123', N'AQAAAAEAACcQAAAAEDs0R2CU8Wbi8rVTu00eMe7ySI0L617pDGE1jT1f4Rprp3ukZyT014Mm2+82ja8NLg==', NULL, 0, N'd6559f32-0aab-4c00-8e41-e83ac09db62d', 0, N'Kim123')
+INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName]) VALUES (N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 0, N'f72ea2dc-ef76-41c2-82cc-bb629a425e41', NULL, 0, 1, NULL, NULL, N'ANABEL123', N'AQAAAAEAACcQAAAAEHe2bZXh0NZdnoNCH4XAZ0RgfBrSCGPenpLb8oRqMueIh6IbSgUOWnSiOthZo48LBA==', NULL, 0, N'aa2bf521-ad7b-44a0-bbaf-47b0b7b87ac2', 0, N'Anabel123')
+INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName]) VALUES (N'afd41b39-3682-4ca1-b679-f08453e8602d', 0, N'cc96e067-fe3d-4a18-b841-d6c18ea71fdd', NULL, 0, 1, NULL, NULL, N'PETE123', N'AQAAAAEAACcQAAAAEK4P0fmDrme3AI7CVgIKOmLnnvtDBRwn0KT/wZuoCPv2f9X+ey4W6xpmF0RL7MXtRA==', NULL, 0, N'eb248dd8-a566-42c5-a26a-beb16a4c19b2', 0, N'Pete123')
+INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName]) VALUES (N'e5b28842-4467-4b33-914b-4360ea8e3705', 0, N'3d60f2a3-f57c-4c25-9a4d-2988b3981be4', NULL, 0, 1, NULL, NULL, N'JARED123', N'AQAAAAEAACcQAAAAEDZpgKFU7EDiCN7U6QPTZYoeqfBljkIXSs9SZkR12me6w8drDgvTW/jfEFTjg1elSA==', NULL, 0, N'43c9b5dc-dd94-4b99-900d-5b9e5e0e3bd1', 0, N'Jared123')
+SET IDENTITY_INSERT [dbo].[Projects] ON 
+
+INSERT [dbo].[Projects] ([ProjectId], [Description], [EndDate], [StartDate], [Title], [userId]) VALUES (2, N'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', CAST(N'2017-12-31T00:00:00.0000000' AS DateTime2), CAST(N'2017-08-31T10:55:42.5971470' AS DateTime2), N'Sample Project Title', N'9bead4c1-950e-4c5a-bb3c-6864f223eda7')
+SET IDENTITY_INSERT [dbo].[Projects] OFF
+SET IDENTITY_INSERT [dbo].[UserProjects] ON 
+
+INSERT [dbo].[UserProjects] ([UserProjectId], [ProjectId], [UserId]) VALUES (1, 2, N'5f8395a6-21cf-4185-b254-fabcd56a48e6')
+INSERT [dbo].[UserProjects] ([UserProjectId], [ProjectId], [UserId]) VALUES (2, 2, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7')
+INSERT [dbo].[UserProjects] ([UserProjectId], [ProjectId], [UserId]) VALUES (3, 2, N'afd41b39-3682-4ca1-b679-f08453e8602d')
+SET IDENTITY_INSERT [dbo].[UserProjects] OFF
+SET IDENTITY_INSERT [dbo].[Phases] ON 
+
+INSERT [dbo].[Phases] ([PhaseId], [Description]) VALUES (1, N'Initiation')
+INSERT [dbo].[Phases] ([PhaseId], [Description]) VALUES (2, N'Planning')
+INSERT [dbo].[Phases] ([PhaseId], [Description]) VALUES (3, N'Execution')
+INSERT [dbo].[Phases] ([PhaseId], [Description]) VALUES (4, N'Testing')
+INSERT [dbo].[Phases] ([PhaseId], [Description]) VALUES (5, N'Review')
+SET IDENTITY_INSERT [dbo].[Phases] OFF
+SET IDENTITY_INSERT [dbo].[Sprints] ON 
+
+INSERT [dbo].[Sprints] ([SprintId], [Done], [EndDate], [Goal], [InProgress], [Name], [ProjectId], [StartDate]) VALUES (1, 0, CAST(N'2017-09-03T00:00:00.0000000' AS DateTime2), N'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 0, N'SPR1', 2, CAST(N'2017-08-31T00:00:00.0000000' AS DateTime2))
+INSERT [dbo].[Sprints] ([SprintId], [Done], [EndDate], [Goal], [InProgress], [Name], [ProjectId], [StartDate]) VALUES (2, 0, CAST(N'2017-09-13T00:00:00.0000000' AS DateTime2), N'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 0, N'SPR 2', 2, CAST(N'2017-09-06T00:00:00.0000000' AS DateTime2))
+INSERT [dbo].[Sprints] ([SprintId], [Done], [EndDate], [Goal], [InProgress], [Name], [ProjectId], [StartDate]) VALUES (3, 0, CAST(N'2017-09-28T00:00:00.0000000' AS DateTime2), N'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 0, N'SPR 3', 2, CAST(N'2017-09-14T00:00:00.0000000' AS DateTime2))
+SET IDENTITY_INSERT [dbo].[Sprints] OFF
+SET IDENTITY_INSERT [dbo].[Tasks] ON 
+
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (1, 0, N'Task Title ', 0, 1, N'High', 1, N'5f8395a6-21cf-4185-b254-fabcd56a48e6', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (2, 0, N'Task Title 2', 0, 2, N'Medium', 1, N'5f8395a6-21cf-4185-b254-fabcd56a48e6', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (3, 0, N'Task Title 3', 1, 3, N'Low', 1, N'5f8395a6-21cf-4185-b254-fabcd56a48e6', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (4, 0, N'Task Title 4', 0, 4, N'Block', 1, N'5f8395a6-21cf-4185-b254-fabcd56a48e6', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (5, 0, N'Task Title 5', 0, 5, N'Bug', NULL, N'5f8395a6-21cf-4185-b254-fabcd56a48e6', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (6, 1, N'Task Title 5', 1, 1, N'High', 1, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (7, 1, N'Task Title 6', 1, 2, N'Block', 1, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (8, 1, N'Task Title 7', 1, 3, N'Bug', 1, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (9, 0, N'Task Title 8 ', 0, 3, N'Bug', 1, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (10, 0, N'Task Title 9', 0, 5, N'Low', NULL, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 2)
+INSERT [dbo].[Tasks] ([TaskId], [Complete], [Description], [InProgress], [PhaseId], [Priority], [SprintId], [UserId], [ProjectId]) VALUES (11, 0, N'Task Title 10', 0, 5, N'Block', NULL, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7', 2)
+SET IDENTITY_INSERT [dbo].[Tasks] OFF
+SET IDENTITY_INSERT [dbo].[UpdateTypes] ON 
+
+INSERT [dbo].[UpdateTypes] ([UpdateTypeId], [Name]) VALUES (1, N'Note')
+INSERT [dbo].[UpdateTypes] ([UpdateTypeId], [Name]) VALUES (2, N'Change')
+INSERT [dbo].[UpdateTypes] ([UpdateTypeId], [Name]) VALUES (3, N'Beef')
+SET IDENTITY_INSERT [dbo].[UpdateTypes] OFF
+SET IDENTITY_INSERT [dbo].[Updates] ON 
+
+INSERT [dbo].[Updates] ([UpdateId], [Note], [ProjectId], [SprintId], [TimeStamp], [UpdateTypeId], [UserId]) VALUES (1, N'I got beef with this app.', 2, NULL, CAST(N'2017-08-31T11:17:44.0046575' AS DateTime2), 3, N'9bead4c1-950e-4c5a-bb3c-6864f223eda7')
+INSERT [dbo].[Updates] ([UpdateId], [Note], [ProjectId], [SprintId], [TimeStamp], [UpdateTypeId], [UserId]) VALUES (2, N'I''ve added a change to this...', 2, NULL, CAST(N'2017-08-31T11:18:37.6398333' AS DateTime2), 2, N'afd41b39-3682-4ca1-b679-f08453e8602d')
+SET IDENTITY_INSERT [dbo].[Updates] OFF
+SET IDENTITY_INSERT [dbo].[ToolTypes] ON 
+
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (1, N'Language')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (2, N'Markdown Language')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (3, N'Database')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (4, N'Framework')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (5, N'Integrated Development Environment')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (6, N'Stylesheet')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (7, N'Hardware')
+INSERT [dbo].[ToolTypes] ([ToolTypeId], [Name]) VALUES (8, N'Other')
+SET IDENTITY_INSERT [dbo].[ToolTypes] OFF
+SET IDENTITY_INSERT [dbo].[Tools] ON 
+
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (1, N'Hypertext Markup Language', N'https://developer.mozilla.org/en-US/docs/Web/HTML', N'HTML', 2)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (2, N'Cascading Stylesheets', N'https://developer.mozilla.org/en-US/docs/Web/CSS', N'CSS', 6)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (3, N'Open-source and cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux.', N'https://docs.microsoft.com/en-us/aspnet/', N'ASP.NET Core', 4)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (4, N'Designed for building a variety of applications that run on the .NET Framework.', N'https://docs.microsoft.com/en-us/dotnet/csharp/csharp', N'C#', 1)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (5, N'Dynamic, reflective, object-oriented, general-purpose programming language.', N'https://www.ruby-lang.org/en/documentation/', N'Ruby', 1)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (6, N'Open source computer hardware and software company, project, and user community that designs and manufactures single-board microcontrollers and microcontroller kits for building digital devices and interactive objects that can sense and control objects in the physical world.', N'https://www.arduino.cc/en/Guide/HomePage', N'Arduino', 7)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (7, N'Capable of creating all types of programs ranging from web applications to mobile apps to video games.', N'https://www.visualstudio.com/vs/getting-started/', N'Microsoft Visual Studio', 5)
+INSERT [dbo].[Tools] ([ToolId], [Description], [Documentation], [Name], [ToolTypeId]) VALUES (8, N'Firebase gives you the tools to develop high-quality apps, grow your user base, and earn more money. We cover the essentials so you can monetize your business and focus on your users.', N'https://firebase.google.com/docs/', N'Google Firebase', 3)
+SET IDENTITY_INSERT [dbo].[Tools] OFF
+SET IDENTITY_INSERT [dbo].[UserStories] ON 
+
+INSERT [dbo].[UserStories] ([UserStoryId], [ProjectId], [Spec]) VALUES (1, 2, N'User Story 1')
+INSERT [dbo].[UserStories] ([UserStoryId], [ProjectId], [Spec]) VALUES (2, 2, N'User Story 2')
+INSERT [dbo].[UserStories] ([UserStoryId], [ProjectId], [Spec]) VALUES (3, 2, N'User Story 3')
+INSERT [dbo].[UserStories] ([UserStoryId], [ProjectId], [Spec]) VALUES (4, 2, N'User Story 4')
+SET IDENTITY_INSERT [dbo].[UserStories] OFF
+INSERT [dbo].[ProjectTools] ([ProjectId], [ToolId]) VALUES (2, 1)
+INSERT [dbo].[ProjectTools] ([ProjectId], [ToolId]) VALUES (2, 2)
+INSERT [dbo].[ProjectTools] ([ProjectId], [ToolId]) VALUES (2, 3)
+INSERT [dbo].[ProjectTools] ([ProjectId], [ToolId]) VALUES (2, 7)
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20170824181612_Initial', N'1.0.0-rtm-21431')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20170824195711_Initial1', N'1.0.0-rtm-21431')

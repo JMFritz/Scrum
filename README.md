@@ -19,6 +19,16 @@ Using an Agile approach to group projects is very interesting to me, so I've dec
  | User can create, read, update, delete individual tools in group toolbox |
 
 
+![projectdetail - copy](https://user-images.githubusercontent.com/25647710/30091737-0f1f8aec-9270-11e7-950b-109209a767b3.PNG)
+
+![projectforms](https://user-images.githubusercontent.com/25647710/30091738-0f1fbaa8-9270-11e7-8bd6-2cf650941994.PNG)
+
+![usertaskbar - copy](https://user-images.githubusercontent.com/25647710/30091736-0f1fa522-9270-11e7-8d69-cf6446c8084a.PNG)
+
+![indiesprint - copy](https://user-images.githubusercontent.com/25647710/30091735-0f1debe2-9270-11e7-8bf9-b67823e439a9.PNG)
+
+![toolbox - copy](https://user-images.githubusercontent.com/25647710/30091739-0f25c4fc-9270-11e7-9cca-555cba0d9c8d.PNG)
+
 ## Setup/Installation Requirements
 
 #### _**Replicating/Editing this Project**_

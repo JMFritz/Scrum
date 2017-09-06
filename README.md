@@ -9,7 +9,7 @@
 Using an Agile approach to group projects is very interesting to me, so I've decided to create a project manager of my own.  Built with C# and ASP.NET Core, imagine yourself as the Scrum Master of any group project and create, view, edit, and delete all the essentials of a basic Scrum based project.  
 
 ## Specifications
- |Behavior| Input (User Action/Selection)| Output (Program Action)|
+ |Behavior|
  |---|
  | User create, read, update, delete a project |
  | User has control of deadlines, team members, tools, user stories, updates, and sprints of each project |

@@ -1,3 +1,70 @@
+# Agile Project Manager
+### Scrum Focused Project Hub
+
+#####  _August 31st, 2017_
+
+##### By _Jun Fritz_
+
+## Description
+Using an Agile approach to group projects is very interesting to me, so I've decided to create a project manager of my own.  Built with C# and ASP.NET Core, imagine yourself as the Scrum Master of any group project and create, view, edit, and delete all the essentials of a basic Scrum based project.  
+
+## Specifications
+ |Behavior| Input (User Action/Selection)| Output (Program Action)|
+ |---|
+ | User create, read, update, delete a project |
+ | User has control of deadlines, team members, tools, user stories, updates, and sprints of each project |
+ | User can create, read, update, delete a sprint |
+ | User can assign tasks and mark tasks complete|
+ | User gets updated progress via progress bars|
+ | User can create, read, update, delete individual tools in group toolbox |
+
+
+## Setup/Installation Requirements
+
+#### _**Replicating/Editing this Project**_
+
+* You will need Microsoft Visual Studio 2015 in order to replicate or edit this project using these instructions.
+* Click the "download or clone" button in this repository and copy the link.
+* In your computers terminal, navigate to the desktop and enter "git clone" followed by pasting the link on your clipboard.
+* Open up Microsoft Visual Studio 2015 and select File> Open> Project/Solution.
+* Navigate to your desktop and double click on your project folder.
+* Then double click on the "Microsoft Visual Studio Solution" type item (it will share the same name as the project as well as a VS icon).
+* One the file has been opened by Visual Studio, bring back your command prompt and navigate to the root path of this project.
+* If using PowerShell, your path to navigate will look something like this: 
+
+         C:\Users\epicodus\documents\Visual Studio 2015\projects\Scrum\src\Scrum>
+      
+* Once you're in the project, run this command:
+
+         dotnet ef database update
+      
+* The command above will create the database required for this project using the class information in the "Models" folder.
+* Viewing and editing all CRUD (create, read, update, delete) functionality can be done in the "Controllers" folder.
+* Viewing and editing all styling and images can be found in the "CSS" and "IMG" folders located within the "wwwroot" folder.
+* Classes for objects and the one to many relationship used in this project can be found in the "Models" folder.
+* All HTML is located in the Views folder and each separate subfolder in it.
+* In order to run tests, rightclick on SonOfCodTests and choose "Build" then open up Test>Windows>TestExplorer and choose "Run All".
+
+## Known bugs
+
+  * No Known Bugs
+
+## Support and contact details
+
+ Contact jun.fritz@gmail.com with any comments, concerns, or questions.
+
+## Technologies Used
+
+ _HTML, CSS, ASP.NET Core, Microsoft Visual Studio 2015, C#, FontAwesome, BootStrap, UIKit_
+
+### License
+
+ MIT
+
+ Copyright (c) 2017 **_Jun Fritz_**
+ 
+ 
+
 ### PRIORITY
 * add full crud for sprints/tasks/userstories/tools/tasks
 * improve app flow
